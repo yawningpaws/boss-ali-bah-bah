@@ -32,7 +32,6 @@ import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
 
 document.addEventListener('turbo:load', () => {
   // Call your functions here, e.g:
-  console.log('do we have turbolinks or what?');
   // initSelect2();
   initFlatpickr();
   initWebrtcPhoto();
