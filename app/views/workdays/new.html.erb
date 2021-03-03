@@ -1,12 +1,15 @@
-<div class="container my-3">
+<div class="container my-3" id='workday-form-dates' data-completed-dates='<%= @workdays_dates.to_json %>'>
   <%= turbo_frame_tag 'workday_form' do %>
     <%= simple_form_for(@workday, data: { turbo: false }) do |f| %>
       <%= f.input :date, as: :string, type: :text %>
-      <%= f.input :check_in_time, as: :string, type: :text %>
-      <%= f.input :check_out_time, as: :string, type: :text %>
+      <% now = Time::now.strftime("%H:%M") %>
+      <% now_plus_9h = (Time::now + 9*60*60).strftime("%H:%M") %>
+      <%= f.input :check_in_time, minute_step: 5, default: Time.parse(now)  %>
+      <%= f.input :check_out_time, minute_step: 5, default: Time.parse(now_plus_9h) %>
       <%= f.button :submit, 'Log my work hours', class: 'btn btn-primary' %>
     <% end %>
     <br>
     <a href="/workdays/not_working" class="btn btn-warning">I am not working today</a>
   <% end %>
 </div>
+

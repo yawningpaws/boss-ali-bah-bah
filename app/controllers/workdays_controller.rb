@@ -1,6 +1,9 @@
 class WorkdaysController < ApplicationController
   def new
     @workday = Workday.new
+    @workdays_dates = Workday.all.map do |day|
+      day.date
+    end
   end
 
   def create
