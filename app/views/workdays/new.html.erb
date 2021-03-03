@@ -1,0 +1,12 @@
+<div class="container my-3">
+  <%= turbo_frame_tag 'workday_form' do %>
+    <%= simple_form_for(@workday, data: { turbo: false }) do |f| %>
+      <%= f.input :date, as: :string, type: :text %>
+      <%= f.input :check_in_time, as: :string, type: :text %>
+      <%= f.input :check_out_time, as: :string, type: :text %>
+      <%= f.button :submit, 'Log my work hours', class: 'btn btn-primary' %>
+    <% end %>
+    <br>
+    <a href="/workdays/not_working" class="btn btn-warning">I am not working today</a>
+  <% end %>
+</div>

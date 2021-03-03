@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_02_073731) do
+ActiveRecord::Schema.define(version: 2021_03_03_061934) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 2021_03_02_073731) do
     t.date "date"
     t.time "check_in_time"
     t.time "check_out_time"
-    t.boolean "on_rest"
-    t.boolean "on_mc"
-    t.bigint "accident_id", null: false
+    t.boolean "on_rest", default: false
+    t.boolean "on_mc", default: false
+    t.bigint "accident_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["accident_id"], name: "index_workdays_on_accident_id"

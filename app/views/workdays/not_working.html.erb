@@ -1,0 +1,10 @@
+<%= turbo_frame_tag 'workday_form' do %>
+  <div class="not_working" data-controller="workday">
+    <%= simple_form_for(@workday, data: { turbo: false }) do |f| %>
+      <%= f.input :date, as: :string, type: :text %>
+      <%= f.input :on_rest, label: 'It is my rest day' %>
+      <%= f.input :on_mc, label: 'I am on MC' %>
+      <%= f.button :submit, 'Save', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% end %>
