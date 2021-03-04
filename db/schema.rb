@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_03_061934) do
+ActiveRecord::Schema.define(version: 2021_03_04_062028) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,13 +109,13 @@ ActiveRecord::Schema.define(version: 2021_03_03_061934) do
   create_table "workdays", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.date "date"
-    t.time "check_in_time"
-    t.time "check_out_time"
     t.boolean "on_rest", default: false
     t.boolean "on_mc", default: false
     t.bigint "accident_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["accident_id"], name: "index_workdays_on_accident_id"
     t.index ["user_id"], name: "index_workdays_on_user_id"
   end

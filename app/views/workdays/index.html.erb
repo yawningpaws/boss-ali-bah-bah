@@ -4,11 +4,11 @@
 
     <% workdays.each do |workday| %>
       <div>
-        <% check_in_time = workday.check_in_time %>
-        <% if check_in_time %>
-          <%= check_intime.strftime("%H:%M") %>
+        <% start_time = workday.start_time %>
+        <% if start_time.nil? %>
+          <%= 'on leave' %>
         <% else %>
-          <%= 'on leave' # this aint working %>
+          <%= start_time.strftime("%H:%M") %>
         <% end %>
       </div>
     <% end %>

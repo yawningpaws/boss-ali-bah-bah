@@ -12,8 +12,8 @@ class WorkdaysController < ApplicationController
     timestep = 5 * 60
     now = Time.at((Time.now.to_r / timestep).round * timestep).strftime("%H:%M")
     now_plus_9h = (Time.at((Time.now.to_r / timestep).round * timestep) + 9 * 60 * 60).strftime("%H:%M")
-    @default_check_in = Time.parse(now)
-    @default_check_out = Time.parse(now_plus_9h)
+    @default_start_time = Time.parse(now)
+    @default_end_time = Time.parse(now_plus_9h)
   end
 
   def create
@@ -55,16 +55,16 @@ class WorkdaysController < ApplicationController
   private
 
   def workday_params
-    params.require(:workday).permit(:date, :check_in_time, :check_out_time, :on_rest, :on_mc)
+    params.require(:workday).permit(:date, :start_time, :end_time, :on_rest, :on_mc)
   end
 
   def update_datetime(workday_params)
     attributes = {}
     attributes[:date] = workday_params[:date]
-    check_in_datetime = "#{workday_params[:date]}T#{workday_params['check_in_time(4i)']}:#{workday_params['check_in_time(5i)']}"
-    attributes[:check_in_time] = DateTime.strptime(check_in_datetime, "%Y-%m-%dT%H:%M")
-    check_out_datetime = "#{workday_params[:date]}T#{workday_params['check_out_time(4i)']}:#{workday_params['check_out_time(5i)']}"
-    attributes[:check_out_time] = DateTime.strptime(check_out_datetime, "%Y-%m-%dT%H:%M")
+    start_datetime = "#{workday_params[:date]}T#{workday_params['start_time(4i)']}:#{workday_params['start_time(5i)']}"
+    attributes[:start_time] = DateTime.strptime(start_datetime, "%Y-%m-%dT%H:%M")
+    end_datetime = "#{workday_params[:date]}T#{workday_params['end_time(4i)']}:#{workday_params['end_time(5i)']}"
+    attributes[:end_time] = DateTime.strptime(end_datetime, "%Y-%m-%dT%H:%M")
     attributes
   end
 end
