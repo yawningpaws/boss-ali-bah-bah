@@ -2,10 +2,8 @@
   <%= turbo_frame_tag 'workday_form' do %>
     <%= simple_form_for(@workday, data: { turbo_frame: '_top' }) do |f| %>
       <%= f.input :date, as: :string, type: :text %>
-      <% now = Time::now.strftime("%H:%M") %>
-      <% now_plus_9h = (Time::now + 9*60*60).strftime("%H:%M") %>
-      <%= f.input :check_in_time, minute_step: 5, default: Time.parse(now)  %>
-      <%= f.input :check_out_time, minute_step: 5, default: Time.parse(now_plus_9h) %>
+      <%= f.input :check_in_time, label: 'I am starting work at', minute_step: 5, default: @default_check_in  %>
+      <%= f.input :check_out_time, label: 'I will end work at', minute_step: 5, default: @default_check_out %>
       <%= f.button :submit, 'Log my work hours', class: 'btn btn-primary' %>
     <% end %>
     <br>

@@ -1,0 +1,16 @@
+<div class="container my-3">
+  <%= month_calendar(events: @workdays) do |date, workdays| %>
+    <%= date.day %>
+
+    <% workdays.each do |workday| %>
+      <div>
+        <% check_in_time = workday.check_in_time %>
+        <% if check_in_time %>
+          <%= check_intime.strftime("%H:%M") %>
+        <% else %>
+          <%= 'on leave' # this aint working %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
