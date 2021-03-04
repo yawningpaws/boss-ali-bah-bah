@@ -34,7 +34,7 @@ class WorkdaysController < ApplicationController
     end
   end
 
-  def not_working
+  def on_leave
     @workday = Workday.new
   end
 

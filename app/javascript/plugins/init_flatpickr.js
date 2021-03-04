@@ -16,7 +16,6 @@ const initFlatpickr = () => {
       altFormat: "F j, Y",
       defaultDate: currentDate,
       disable: JSON.parse(workdayForm.dataset.completedDates)
-      // disable dates which already have records
     });
   }
 }
