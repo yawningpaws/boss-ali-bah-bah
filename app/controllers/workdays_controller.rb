@@ -41,7 +41,12 @@ class WorkdaysController < ApplicationController
 
   def update
     @workday = Workday.find(params[:id])
-    if @workday.update(workday_params)
+    if workday_params[:on_rest].nil? && workday_params[:on_mc].nil?
+      attributes = update_datetime(workday_params)
+    else
+      attributes = workday_params
+    end
+    if @workday.update(attributes)
       redirect_to root_path
     else
       render 'edit'

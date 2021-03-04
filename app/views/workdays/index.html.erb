@@ -5,10 +5,13 @@
     <% workdays.each do |workday| %>
       <div>
         <% start_time = workday.start_time %>
-        <% if start_time.nil? %>
-          <%= 'on leave' %>
+        <% if workday.on_rest %>
+          <div class="bg-primary rounded-circle text-center" style="height: 1rem; width: 1rem; line-height: 1rem"> <p class="align-middle">1</p>  </div>
         <% else %>
-          <%= start_time.strftime("%H:%M") %>
+          <%= link_to edit_workday_path(workday) do %>
+            <%= start_time.strftime("%H:%M") %>
+            <div class="bg-success rounded-circle text-center" style="height: 1rem; width: 1rem; line-height: 1rem"></div>
+          <% end %>
         <% end %>
       </div>
     <% end %>

@@ -1,2 +1,12 @@
-<h1>Workdays#edit</h1>
-<p>Find me in app/views/workdays/edit.html.erb</p>
+<div class="container my-3" id='workday-form-dates' data-completed-dates='<%= @workdays_dates.to_json %>'>
+  <%= turbo_frame_tag 'workday_form' do %>
+    <%= simple_form_for(@workday, data: { turbo_frame: '_top' }) do |f| %>
+      <%= f.input :date, as: :string, type: :text %>
+      <%= f.input :start_time, as: :time, label: 'I started work at', minute_step: 5 %>
+      <%= f.input :end_time, as: :time, label: 'I ended work at', minute_step: 5 %>
+      <%= f.button :submit, 'Log my work hours', class: 'btn btn-primary' %>
+    <% end %>
+    <br>
+    <a href="/workdays/on_leave" class="btn btn-warning">I did not work that day</a>
+  <% end %>
+</div>
