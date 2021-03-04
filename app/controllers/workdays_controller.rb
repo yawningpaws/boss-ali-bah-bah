@@ -63,7 +63,15 @@ class WorkdaysController < ApplicationController
   end
 
   def on_leave
-    @workday = Workday.new
+    if params[:id]
+      @workday = Workday.find(params[:id])
+    else
+      @workday = Workday.new
+    end
+  end
+
+  def working
+    @workday = Workday.find(params[:id])
   end
 
   private
