@@ -1,16 +1,21 @@
 <div class="container my-3">
   <%= month_calendar(events: @workdays) do |date, workdays| %>
-    <%= date.day %>
+    <% if workdays.empty? %>
+      <%= link_to "#{new_workday_path}?#{date}" do %>
+        <%= date.day %>
+      <% end %>
+    <% end %>
 
     <% workdays.each do |workday| %>
       <div>
-        <% start_time = workday.start_time %>
+        <%= link_to edit_workday_path(workday) do %>
         <% if workday.on_rest %>
-          <div class="bg-primary rounded-circle text-center" style="height: 1rem; width: 1rem; line-height: 1rem"> <p class="align-middle">1</p>  </div>
+          <div class="bg-primary rounded-circle text-center" style="height: 1rem; width: 1rem; line-height: 1rem"></div>
+        <% elsif workday.on_mc %>
+          <div class="bg-warning rounded-circle text-center" style="height: 1rem; width: 1rem; line-height: 1rem"></div>
         <% else %>
-          <%= link_to edit_workday_path(workday) do %>
-            <%= start_time.strftime("%H:%M") %>
-            <div class="bg-success rounded-circle text-center" style="height: 1rem; width: 1rem; line-height: 1rem"></div>
+          <div class="bg-success rounded-circle text-center" style="height: 1rem; width: 1rem; line-height: 1rem"></div>
+          <%= "#{workday.start_time.strftime("%H:%M")}-#{workday.end_time.strftime("%H:%M")}" %>
           <% end %>
         <% end %>
       </div>

@@ -4,9 +4,9 @@
       <%= f.input :date, as: :string, type: :text %>
       <%= f.input :start_time, as: :time, label: 'I started work at', minute_step: 5 %>
       <%= f.input :end_time, as: :time, label: 'I ended work at', minute_step: 5 %>
-      <%= f.button :submit, 'Log my work hours', class: 'btn btn-primary' %>
+      <%= f.button :submit, 'Log my work hours', class: 'btn btn-block btn-primary' %>
     <% end %>
     <br>
-    <a href="/workdays/on_leave" class="btn btn-warning">I did not work that day</a>
+    <a href="/workdays/on_leave" class="btn btn-block btn-warning">I did not work that day</a>
   <% end %>
 </div>

@@ -22,11 +22,12 @@ class WorkdaysController < ApplicationController
       @workday = Workday.new(attributes)
     else
       @workday = Workday.new(workday_params)
+      @workday.start_time = @workday.date
     end
     @workday.user = current_user
     respond_to do |format|
       if @workday.save
-        format.html { redirect_to root_path, notice: 'You successfully checked in today!' }
+        format.html { redirect_to workdays_path, notice: 'You successfully checked in today!' }
         format.json { render :new }
       else
         format.html { render :new, alert: 'Please fix errors!' }
@@ -45,11 +46,16 @@ class WorkdaysController < ApplicationController
       attributes = update_datetime(workday_params)
     else
       attributes = workday_params
+      attributes[:start_time] = attributes[:date]
     end
-    if @workday.update(attributes)
-      redirect_to root_path
-    else
-      render 'edit'
+    respond_to do |format|
+      if @workday.update(attributes)
+        format.html { redirect_to workdays_path, notice: 'You successfully checked in today!' }
+        format.json { render :new }
+      else
+        format.html { render :new, alert: 'Please fix errors!' }
+        format.json { render json: @workday.errors, status: :unprocessable_entity }
+      end
     end
   end
 
