@@ -53,7 +53,7 @@ class WorkdaysController < ApplicationController
     end
     respond_to do |format|
       if @workday.update(attributes)
-        format.html { redirect_to workdays_path, notice: 'You successfully checked in today!' }
+        format.html { redirect_to workdays_path, notice: 'You successfully updated your work log!' }
         format.json { render :new }
       else
         format.html { render :new, alert: 'Please fix errors!' }
