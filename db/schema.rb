@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2021_03_02_073731) do
   create_table "payslips", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.float "amount"
-    t.string "month_year"
+    t.date "month"
     t.string "payment_method"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

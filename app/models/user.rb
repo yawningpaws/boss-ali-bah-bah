@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  after_update_commit {broadcast_replace_to "tweets"}
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :notifications, dependent: :destroy
