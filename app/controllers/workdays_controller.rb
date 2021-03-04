@@ -9,10 +9,15 @@ class WorkdaysController < ApplicationController
   def create
     @workday = Workday.new(workday_params)
     @workday.user = current_user
-    if @workday.save
-      redirect_to root_path
-    else
-      render 'new'
+
+    respond_to do |format|
+      if @workday.save
+        format.html { redirect_to root_path, notice: 'You successfully checked in today!' }
+        format.json { render :new }
+      else
+        format.html { render :new }
+        format.json { render json: @workday.errors, status: :unprocessable_entity }
+      end
     end
   end
 

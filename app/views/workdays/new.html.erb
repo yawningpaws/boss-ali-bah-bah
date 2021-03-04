@@ -1,6 +1,6 @@
 <div class="container my-3" id='workday-form-dates' data-completed-dates='<%= @workdays_dates.to_json %>'>
   <%= turbo_frame_tag 'workday_form' do %>
-    <%= simple_form_for(@workday, data: { turbo: false }) do |f| %>
+    <%= simple_form_for(@workday, data: { turbo_frame: '_top' }) do |f| %>
       <%= f.input :date, as: :string, type: :text %>
       <% now = Time::now.strftime("%H:%M") %>
       <% now_plus_9h = (Time::now + 9*60*60).strftime("%H:%M") %>
