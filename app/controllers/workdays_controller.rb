@@ -38,6 +38,9 @@ class WorkdaysController < ApplicationController
 
   def edit
     @workday = Workday.find(params[:id])
+    @workdays_dates = Workday.all.map do |day|
+      day.date
+    end
   end
 
   def update

@@ -1,15 +1,19 @@
 <div class="simple-calendar">
-  <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+  <div class="calendar-heading d-flex align-items-center justify-content-around">
+    <%= link_to calendar.url_for_previous_view do %>
+      <i class="fas fa-caret-left fa-3x"></i>
+    <% end %>
+    <h4><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></h4>
+    <%= link_to calendar.url_for_next_view do %>
+      <i class="fas fa-caret-right fa-3x"></i>
+    <% end %>
   </div>
 
   <table class="table table-striped">
     <thead>
       <tr>
         <% date_range.slice(0, 7).each do |day| %>
-          <th><%= t('date.abbr_day_names')[day.wday] %></th>
+          <th style="vertical-align:middle; text-align:center;"><%= t('date.abbr_day_names')[day.wday] %></th>
         <% end %>
       </tr>
     </thead>
@@ -18,7 +22,7 @@
       <% date_range.each_slice(7) do |week| %>
         <tr>
           <% week.each do |day| %>
-            <%= content_tag :td, class: calendar.td_classes_for(day) do %>
+            <%= content_tag :td, class: calendar.td_classes_for(day), style: "vertical-align:middle; text-align:center; width: 10vw;" do %>
               <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
                 <% capture_haml(day, sorted_events.fetch(day, []), &passed_block) %>
               <% else %>
