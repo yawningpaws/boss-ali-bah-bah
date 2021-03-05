@@ -50,6 +50,6 @@ class AccidentsController < ApplicationController
   private
 
   def accident_params
-    params.require(:accident).permit(:date, :time, :description, :injured_part, :medical_facility, :paid_by_employer, :mc_days)
+    params.require(:accident).permit(:date, :time, :description, :injured_part, :medical_facility, :paid_by_employer, :mc_days, photos: [])
   end
 end
