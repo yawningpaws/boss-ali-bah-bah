@@ -1,0 +1,24 @@
+<div class="container my-3">
+  <%= month_calendar(events: @workdays) do |date, workdays| %>
+    <% if workdays.empty? %>
+      <%= link_to "#{new_workday_path}?#{date}" do %>
+        <%= date.day %>
+      <% end %>
+    <% else %>
+
+      <% workdays.each do |workday| %>
+        <div>
+          <%= link_to "#{edit_workday_path(workday)}?#{date}" do %>
+          <% if workday.on_rest %>
+            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="height: 2rem; width: 2rem; line-height: 1rem; margin: auto;"><%= date.day %></div>
+          <% elsif workday.on_mc %>
+            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" style="height: 2rem; width: 2rem; line-height: 1rem; margin: auto;"><%= date.day %></div>
+          <% else %>
+            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" style="height: 2rem; width: 2rem; line-height: 1rem; margin: auto;"><%= date.day %></div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

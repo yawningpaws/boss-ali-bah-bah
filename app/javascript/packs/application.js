@@ -27,14 +27,14 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { initFlatpickr } from '../plugins/init_flatpickr';
-import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
+//import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
+import "controllers";
 
 
 document.addEventListener('turbo:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initFlatpickr();
-  initWebrtcPhoto();
+  //initWebrtcPhoto();
 });
 
-import "controllers"

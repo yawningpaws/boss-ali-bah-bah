@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations"}
+
   root to: 'pages#home'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :accidents do
     member do
@@ -9,10 +11,14 @@ Rails.application.routes.draw do
     end
   end
 
-  # get '/accidents/new', to: 'accidents#new'
-  # post '/accidents/new', to: 'accidents#create'
-  # get '/accidents/new2', to: 'accidents#new2'
-  # patch '/accidents/new2.:id', to: 'accidents#new3'
-  # patch '/accidents/new3.:id', to: 'accidents#complete', as: 'accidents_new3'
-  # get '/accident', to: 'accidents#new3'
+  get '/onboarding', to: 'users#onboarding', as: 'onboarding'
+  patch '/contract_update', to: 'users#contract_update', as: 'contract_update'
+  get '/personal_details', to: 'users#personal_details', as: 'personal_details'
+  patch '/personal_update', to: 'users#personal_update', as: 'personal_update'
+  resources :users
+  resources :workdays, only: [:index, :new, :create, :edit, :update]
+  get 'workdays/on_leave', to: 'workdays#on_leave'
+  get 'workdays/on_leave/:id', to: 'workdays#on_leave'
+  get 'workdays/working/:id', to: 'workdays#working'
+
 end

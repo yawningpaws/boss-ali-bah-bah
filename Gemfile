@@ -34,6 +34,7 @@ gem 'simple_form'
 gem 'devise'
 gem 'cloudinary', '~> 1.16.0'
 gem 'serviceworker-rails'
+gem "simple_calendar", "~> 2.4"
 
 group :development, :test do
   gem 'pry-byebug'
