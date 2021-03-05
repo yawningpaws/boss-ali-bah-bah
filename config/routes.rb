@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :accidents do
+    member do
+      get :new3
+      get :complete
+    end
+  end
+
   get '/onboarding', to: 'users#onboarding', as: 'onboarding'
   patch '/contract_update', to: 'users#contract_update', as: 'contract_update'
   get '/personal_details', to: 'users#personal_details', as: 'personal_details'

@@ -4,8 +4,9 @@ class CreateAccidents < ActiveRecord::Migration[6.1]
       t.references :user, null: false, foreign_key: true
       t.text :description
       t.date :date
-      t.string :time
+      t.time :time
       t.string :injured_part
+      t.integer :mc_days
       t.boolean :paid_by_employer
       t.string :medical_facility
 
