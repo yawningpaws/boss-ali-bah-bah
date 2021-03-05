@@ -1,4 +1,5 @@
 class Workday < ApplicationRecord
   belongs_to :user
-  belongs_to :accident
+
+  validates :date, uniqueness: true
 end
