@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 2021_03_02_073731) do
     t.bigint "user_id", null: false
     t.text "description"
     t.date "date"
-    t.string "time"
+    t.time "time"
     t.string "injured_part"
+    t.integer "mc_days"
     t.boolean "paid_by_employer"
     t.string "medical_facility"
     t.datetime "created_at", precision: 6, null: false
