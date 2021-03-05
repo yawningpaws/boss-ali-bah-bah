@@ -28,6 +28,7 @@ import "bootstrap";
 // import { initSelect2 } from '../components/init_select2';
 import { initFlatpickr } from '../plugins/init_flatpickr';
 import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
+import "controllers";
 
 
 document.addEventListener('turbo:load', () => {
@@ -37,4 +38,3 @@ document.addEventListener('turbo:load', () => {
   initWebrtcPhoto();
 });
 
-import "controllers"

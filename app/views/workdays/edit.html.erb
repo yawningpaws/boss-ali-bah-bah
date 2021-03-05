@@ -1,0 +1,26 @@
+<div class="container my-3" id='workday-form-dates' data-completed-dates='<%= @workdays_dates.to_json %>' data-date='<%= @workday.date %>'>
+  <% if @workday.on_rest || @workday.on_mc %>
+    <%= turbo_frame_tag 'workday_form' do %>
+      <%= simple_form_for(@workday, data: { turbo_frame: '_top' }) do |f| %>
+        <%= f.input :date, as: :string, type: :text %>
+        <h6><strong>I did not work because</strong></h6>
+        <%= f.input :on_rest, label: 'It was my rest day' %>
+        <%= f.input :on_mc, label: 'I was on MC' %>
+        <%= f.button :submit, 'Update my work day', class: 'btn btn-block btn-primary' %>
+        <br>
+        <a href="/workdays/working/<%= @workday.id %>" class="btn btn-block btn-warning">I worked</a>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= turbo_frame_tag 'workday_form' do %>
+      <%= simple_form_for(@workday, data: { turbo_frame: '_top' }) do |f| %>
+        <%= f.input :date, as: :string, type: :text %>
+        <%= f.input :start_time, as: :time, label: 'I started work at', minute_step: 5 %>
+        <%= f.input :end_time, as: :time, label: 'I ended work at', minute_step: 5 %>
+        <%= f.button :submit, 'Update my work day', class: 'btn btn-block btn-primary' %>
+        <br>
+        <a href="/workdays/on_leave/<%= @workday.id %>" class="btn btn-block btn-warning">I did not work today</a>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
