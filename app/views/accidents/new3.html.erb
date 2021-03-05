@@ -1,0 +1,20 @@
+<%= turbo_frame_tag "accident" do %>
+<div class="bg-secondary mt-3 mb-5 d-flex w-100 justify-content-between align-items-center" style="height:5px">
+  <div class="bg-primary rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px">
+    <p class="align-middle text-white">1</p>
+  </div>
+  <div class="bg-primary rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px">
+    <p class="text-white">2</p>
+  </div>
+  <div class="bg-primary rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px">
+    <p class="text-white">3</p>
+  </div>
+</div>
+<%= simple_form_for @accident do |f| %>
+<%= f.input :paid_by_employer, as: :select %>
+<%= f.input :mc_days %>
+<%= f.submit 'Finish', class: 'btn btn-primary btn-block mb-3' %>
+<%= f.input :photos, as: :file, input_html: { multiple: true } %>
+<% end %>
+<%= button_to "Back", edit_accident_path(@accident), class: 'btn btn-block btn-warning'%>
+<% end %>

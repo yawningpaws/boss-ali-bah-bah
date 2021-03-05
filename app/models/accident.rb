@@ -3,4 +3,6 @@ class Accident < ApplicationRecord
   has_many :workdays
   has_many_attached :photos
   has_one_attached :audio
+
+  validates :description, presence: true
 end
