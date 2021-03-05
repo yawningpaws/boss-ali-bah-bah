@@ -20,7 +20,6 @@ const displayNotification = () => {
 
 const initNotif = () => {
   const btn = document.querySelector('#btn');
-  alert('hi');
   btn.addEventListener('click', () => {
     displayNotification();
   })
