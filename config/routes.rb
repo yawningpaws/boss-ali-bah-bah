@@ -14,4 +14,10 @@ Rails.application.routes.draw do
   get 'workdays/on_leave/:id', to: 'workdays#on_leave'
   get 'workdays/working/:id', to: 'workdays#working'
 
+  # Sidekiq Web UI, only for admins.
+  require "sidekiq/web"
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
 end
