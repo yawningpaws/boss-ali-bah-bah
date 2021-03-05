@@ -1,11 +1,11 @@
-<%= turbo_frame_tag 'workday_form', target: '_top' do %>
+<%= turbo_frame_tag 'workday_form' do %>
   <div data-controller="workday">
     <%= simple_form_for(@workday, data: { turbo_frame: '_top' }) do |f| %>
       <%= f.input :date, as: :string, type: :text %>
       <%= f.input :start_time, as: :time, label: 'I started work at', minute_step: 5 %>
       <%= f.input :end_time, as: :time, label: 'I ended work at', minute_step: 5 %>
-      <%= f.input :on_rest, as: :hidden, type: 'hidden', :input_html => { :checked => false }  %>
-      <%= f.input :on_mc, as: :hidden, :input_html => { :checked => false } %>
+      <%= f.input :on_rest, type: 'hidden', input_html: { checked: false, value: 'false' }  %>
+      <%= f.input :on_mc, input_html: { checked: false, value: 'false' } %>
       <%= f.button :submit, 'Update my work day', class: 'btn btn-block btn-primary' %>
     <% end %>
   </div>

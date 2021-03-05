@@ -8,7 +8,7 @@
         <%= f.input :on_mc, label: 'I was on MC' %>
         <%= f.button :submit, 'Update my work day', class: 'btn btn-block btn-primary' %>
         <br>
-        <a href="/workdays/working" class="btn btn-block btn-warning">I worked</a>
+        <a href="/workdays/working/<%= @workday.id %>" class="btn btn-block btn-warning">I worked</a>
       <% end %>
     <% end %>
   <% else %>
@@ -19,7 +19,7 @@
         <%= f.input :end_time, as: :time, label: 'I ended work at', minute_step: 5 %>
         <%= f.button :submit, 'Update my work day', class: 'btn btn-block btn-primary' %>
         <br>
-        <a href="/workdays/on_leave" class="btn btn-block btn-warning">I did not work today</a>
+        <a href="/workdays/on_leave/<%= @workday.id %>" class="btn btn-block btn-warning">I did not work today</a>
       <% end %>
     <% end %>
   <% end %>

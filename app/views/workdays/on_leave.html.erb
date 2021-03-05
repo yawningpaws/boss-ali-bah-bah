@@ -1,4 +1,4 @@
-<%= turbo_frame_tag 'workday_form', target: '_top' do %>
+<%= turbo_frame_tag 'workday_form' do %>
   <div data-controller="workday">
     <%= simple_form_for(@workday, data: { turbo_frame: '_top' }) do |f| %>
       <%= f.input :date, as: :string, type: :text %>

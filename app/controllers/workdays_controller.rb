@@ -18,7 +18,7 @@ class WorkdaysController < ApplicationController
 
   def create
     if workday_params[:on_rest].nil? && workday_params[:on_mc].nil?
-      attributes = update_datetime(workday_params)
+      attributes = create_datetime(workday_params)
       @workday = Workday.new(attributes)
     else
       @workday = Workday.new(workday_params)
@@ -45,11 +45,12 @@ class WorkdaysController < ApplicationController
 
   def update
     @workday = Workday.find(params[:id])
-    if workday_params[:on_rest].nil? && workday_params[:on_mc].nil?
+    if workday_params[:on_rest] == "0" && workday_params[:on_mc] == "0"
       attributes = update_datetime(workday_params)
     else
       attributes = workday_params
       attributes[:start_time] = attributes[:date]
+      attributes[:end_time] = attributes[:date]
     end
     respond_to do |format|
       if @workday.update(attributes)
@@ -80,6 +81,16 @@ class WorkdaysController < ApplicationController
     params.require(:workday).permit(:date, :start_time, :end_time, :on_rest, :on_mc)
   end
 
+  def create_datetime(workday_params)
+    attributes = {}
+    attributes[:date] = workday_params[:date]
+    start_datetime = "#{workday_params[:date]}T#{workday_params['start_time(4i)']}:#{workday_params['start_time(5i)']}"
+    attributes[:start_time] = DateTime.strptime(start_datetime, "%Y-%m-%dT%H:%M")
+    end_datetime = "#{workday_params[:date]}T#{workday_params['end_time(4i)']}:#{workday_params['end_time(5i)']}"
+    attributes[:end_time] = DateTime.strptime(end_datetime, "%Y-%m-%dT%H:%M")
+    attributes
+  end
+
   def update_datetime(workday_params)
     attributes = {}
     attributes[:date] = workday_params[:date]
@@ -87,6 +98,8 @@ class WorkdaysController < ApplicationController
     attributes[:start_time] = DateTime.strptime(start_datetime, "%Y-%m-%dT%H:%M")
     end_datetime = "#{workday_params[:date]}T#{workday_params['end_time(4i)']}:#{workday_params['end_time(5i)']}"
     attributes[:end_time] = DateTime.strptime(end_datetime, "%Y-%m-%dT%H:%M")
+    attributes[:on_mc] = false
+    attributes[:on_rest] = false
     attributes
   end
 end
