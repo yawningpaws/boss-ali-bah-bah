@@ -1,4 +1,5 @@
- <div class="container">
+<%= turbo_frame_tag "edit-profile" do %>
+<div class="container" id="capture">
   <div class="bg-secondary mt-5 d-flex w-100 justify-content-between align-items-center" style="height:5px">
     <div class="bg-dark rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="align-middle">1</p>  </div>
     <div class="bg-primary rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="text-secondary">2</p> </div>
@@ -6,32 +7,26 @@
   </div>
   <br><br>
   <h2 class ="text-center">Record details of your contract</h2>
-  <div data-controller="onboarding">
-
-
+  <div>
+    <%= simple_form_for current_user, url: 'contract_update' do |f| %>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#ipa" role="tab" aria-controls="home" aria-selected="true">Upload IPA Photo</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="ipa" role="tabpanel" aria-labelledby="home-tab">
+        <%= f.input :ipa_photo%>
+    </div>
   </div>
 
-
-
-  <%= turbo_frame_tag 'onboarding_form' do %>
-
-  <br>
-  <div class="row justify-content-center ">
-    <a href="/users/take_photo" class="btn btn-warning">Take a photo</a>
-    <a href="/users/enter_details" class="btn btn-warning">Enter contract details</a>
-  </div>
+  <%= f.button :submit, class: 'btn btn-primary btn-block', value: 'Upload' %>
   <% end %>
-<!--   <form action="" class="my-5">
-   <div class="camera">
-    <video id="video">Video stream not available.</video>
-    <button id="startbutton">Take photo</button>
-  </div>
-  <canvas id="canvas">
-  </canvas>
-  <div class="output">
-    <img id="photo" alt="The screen capture will appear in this box.">
-  </div>
-  <input type="submit" Value="Next" class="btn btn-primary float-right my-3">
-</form> -->
+
+  <%= link_to 'Skip', personal_details_path, class: 'btn btn-secondary btn-block my-3' %>
+  <% end %>
+</div>
+
+</div>
 
 </div>
