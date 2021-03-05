@@ -7,6 +7,7 @@
 require("@rails/activestorage").start()
 require("channels")
 import "@hotwired/turbo-rails"
+//= require serviceworker-companion
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
@@ -29,12 +30,16 @@ import "bootstrap";
 import { initFlatpickr } from '../plugins/init_flatpickr';
 //import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
 import "controllers";
-
+import "../plugins/register_serviceworker.js";
+import "../plugins/notifications.js";
+import initNotif from "../plugins/notifications.js";
 
 document.addEventListener('turbo:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initFlatpickr();
+  initNotif();
   //initWebrtcPhoto();
+  // displayNotification();
 });
 
