@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       get :complete
     end
   end
+  post '/accidents/send', to: 'accidents#send_accident'
 
   get '/onboarding', to: 'users#onboarding', as: 'onboarding'
   patch '/contract_update', to: 'users#contract_update', as: 'contract_update'

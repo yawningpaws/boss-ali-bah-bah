@@ -13,8 +13,8 @@
 <%= simple_form_for @accident do |f| %>
 <%= f.input :paid_by_employer, as: :select %>
 <%= f.input :mc_days %>
-<%= f.submit 'Finish', class: 'btn btn-primary btn-block mb-3' %>
 <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+<%= f.submit 'Finish', class: 'btn btn-primary btn-block mb-3' %>
 <% end %>
-<%= button_to "Back", edit_accident_path(@accident), class: 'btn btn-block btn-warning'%>
+<%= link_to "Back", edit_accident_path(@accident), class: 'btn btn-block btn-warning' %>
 <% end %>
