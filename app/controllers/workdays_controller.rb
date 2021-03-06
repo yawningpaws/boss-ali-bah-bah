@@ -1,6 +1,7 @@
 class WorkdaysController < ApplicationController
   def index
     @workdays = Workday.where(user: current_user)
+    @payslips = Payslip.where(user: current_user)
   end
 
   def new

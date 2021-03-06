@@ -3,7 +3,7 @@
     <%= link_to calendar.url_for_previous_view do %>
       <i class="fas fa-caret-left fa-3x"></i>
     <% end %>
-    <h4><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></h4>
+    <h4 id="month-year"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></h4>
     <%= link_to calendar.url_for_next_view do %>
       <i class="fas fa-caret-right fa-3x"></i>
     <% end %>
@@ -22,7 +22,7 @@
       <% date_range.each_slice(7) do |week| %>
         <tr>
           <% week.each do |day| %>
-            <%= content_tag :td, class: calendar.td_classes_for(day), style: "vertical-align:middle; text-align:center; width: 10vw;" do %>
+            <%= content_tag :td, class: calendar.td_classes_for(day), style: "vertical-align:middle; text-align:center; min-width: 2.5rem; height: 3rem" do %>
               <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
                 <% capture_haml(day, sorted_events.fetch(day, []), &passed_block) %>
               <% else %>

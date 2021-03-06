@@ -1,11 +1,10 @@
-<div class="container my-3">
+<div class="container my-3 scrollable">
   <%= month_calendar(events: @workdays) do |date, workdays| %>
     <% if workdays.empty? %>
       <%= link_to "#{new_workday_path}?#{date}" do %>
         <%= date.day %>
       <% end %>
     <% else %>
-
       <% workdays.each do |workday| %>
         <div>
           <%= link_to "#{edit_workday_path(workday)}?#{date}" do %>
@@ -35,4 +34,24 @@
       <p class="my-0 mx-1">On MC</p>
     </div>
   </div>
+
+  <div class="my-3 py-3 bg-white" style="text-align: center;">
+    <h5>Salary</h5>
+    <% start_date = params[:start_date] %>
+    <% if start_date %>
+      <% start_date_arr = start_date.split('-').map(&:to_i) %>
+      <% payslip = @payslips.find_by(month: start_date_arr[1], year: start_date_arr[0]) %>
+    <% else %>
+      <% payslip = @payslips.find_by(month: Time.now.month, year: Time.now.year) %>
+    <% end %>
+    <% if payslip %>
+      <p class="my-0">Received $<%= payslip.amount %></p>
+      <p>By <%= payslip.payment_method %></p>
+      <%= link_to "Edit", new_payslip_path, class: "btn btn-primary" %>
+    <% else %>
+      <p class="my-0">Not received yet</p>
+      <%= link_to "Add", new_payslip_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
 </div>
