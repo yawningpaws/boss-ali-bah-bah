@@ -85,9 +85,9 @@ class WorkdaysController < ApplicationController
     attributes = {}
     attributes[:date] = workday_params[:date]
     start_datetime = "#{workday_params[:date]}T#{workday_params['start_time(4i)']}:#{workday_params['start_time(5i)']}"
-    attributes[:start_time] = DateTime.strptime(start_datetime, "%Y-%m-%dT%H:%M")
+    attributes[:start_time] = Time.zone.strptime(start_datetime, "%Y-%m-%dT%H:%M")
     end_datetime = "#{workday_params[:date]}T#{workday_params['end_time(4i)']}:#{workday_params['end_time(5i)']}"
-    attributes[:end_time] = DateTime.strptime(end_datetime, "%Y-%m-%dT%H:%M")
+    attributes[:end_time] = Time.zone.strptime(end_datetime, "%Y-%m-%dT%H:%M")
     attributes
   end
 
@@ -95,9 +95,9 @@ class WorkdaysController < ApplicationController
     attributes = {}
     attributes[:date] = workday_params[:date]
     start_datetime = "#{workday_params[:date]}T#{workday_params['start_time(4i)']}:#{workday_params['start_time(5i)']}"
-    attributes[:start_time] = DateTime.strptime(start_datetime, "%Y-%m-%dT%H:%M")
+    attributes[:start_time] = Time.zone.strptime(start_datetime, "%Y-%m-%dT%H:%M")
     end_datetime = "#{workday_params[:date]}T#{workday_params['end_time(4i)']}:#{workday_params['end_time(5i)']}"
-    attributes[:end_time] = DateTime.strptime(end_datetime, "%Y-%m-%dT%H:%M")
+    attributes[:end_time] = Time.zone.strptime(end_datetime, "%Y-%m-%dT%H:%M")
     attributes[:on_mc] = false
     attributes[:on_rest] = false
     attributes
