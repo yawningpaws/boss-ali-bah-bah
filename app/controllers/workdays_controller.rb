@@ -1,9 +1,4 @@
 class WorkdaysController < ApplicationController
-  def index
-    @workdays = Workday.where(user: current_user)
-    @payslips = Payslip.where(user: current_user)
-  end
-
   def new
     @workday = Workday.new
     @workdays_dates = Workday.all.map do |day|
@@ -28,7 +23,7 @@ class WorkdaysController < ApplicationController
     @workday.user = current_user
     respond_to do |format|
       if @workday.save
-        format.html { redirect_to workdays_path, notice: 'You successfully checked in today!' }
+        format.html { redirect_to calendar_path, notice: 'You successfully checked in today!' }
         format.json { render :new }
       else
         format.html { render :new, alert: 'Please fix errors!' }
@@ -55,7 +50,7 @@ class WorkdaysController < ApplicationController
     end
     respond_to do |format|
       if @workday.update(attributes)
-        format.html { redirect_to workdays_path, notice: 'You successfully updated your work log!' }
+        format.html { redirect_to calendar_path, notice: 'You successfully updated your work log!' }
         format.json { render :new }
       else
         format.html { render :new, alert: 'Please fix errors!' }

@@ -4,6 +4,6 @@ class Payslip < ApplicationRecord
 
   validates :month, presence: true, inclusion: { in: (1..12) }
   validates :year, presence: true
-  valitdate :amount, presence: true
-  validates :payment_method, inclusion: { in: ["bank transfer", "cash", "both"] }
+  validates :amount, presence: true
+  validates :payment_method, inclusion: { in: ["bank transfer", "cash", "bank transfer and cash"] }
 end
