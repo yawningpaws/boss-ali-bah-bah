@@ -1,0 +1,12 @@
+.calendar-circle {
+  height: 2rem;
+  width: 2rem;
+  line-height: 1rem;
+
+  &.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+}

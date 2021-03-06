@@ -10,15 +10,29 @@
         <div>
           <%= link_to "#{edit_workday_path(workday)}?#{date}" do %>
           <% if workday.on_rest %>
-            <div class="bg-primary rounded-circle d-flex align-items-center justify-content-center" style="height: 2rem; width: 2rem; line-height: 1rem; margin: auto;"><%= date.day %></div>
+            <div class="bg-primary rounded-circle calendar-circle date"><%= date.day %></div>
           <% elsif workday.on_mc %>
-            <div class="bg-warning rounded-circle d-flex align-items-center justify-content-center" style="height: 2rem; width: 2rem; line-height: 1rem; margin: auto;"><%= date.day %></div>
+            <div class="bg-warning rounded-circle calendar-circle date"><%= date.day %></div>
           <% else %>
-            <div class="bg-success rounded-circle d-flex align-items-center justify-content-center" style="height: 2rem; width: 2rem; line-height: 1rem; margin: auto;"><%= date.day %></div>
+            <div class="bg-success rounded-circle d-flex calendar-circle date"><%= date.day %></div>
             <% end %>
           <% end %>
         </div>
       <% end %>
     <% end %>
   <% end %>
+  <div class="d-flex justify-content-around">
+    <div class="d-flex align-items-center">
+      <div class="bg-success rounded-circle calendar-circle m-0"></div>
+      <p class="my-0 mx-1"> - Work day</p>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="bg-primary rounded-circle calendar-circle m-0"></div>
+      <p class="my-0 mx-1"> - Rest day</p>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="bg-warning rounded-circle  calendar-circle m-0"></div>
+      <p class="my-0 mx-1"> - On MC</p>
+    </div>
+  </div>
 </div>
