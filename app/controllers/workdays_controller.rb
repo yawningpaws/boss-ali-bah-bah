@@ -17,13 +17,14 @@ class WorkdaysController < ApplicationController
       attributes = create_datetime(workday_params)
       @workday = Workday.new(attributes)
     else
-      @workday = Workday.new(workday_params)
+      attributes = workday_params
+      @workday = Workday.new(attributes)
       @workday.start_time = @workday.date
     end
     @workday.user = current_user
     respond_to do |format|
       if @workday.save
-        format.html { redirect_to calendar_path, notice: 'You successfully checked in today!' }
+        format.html { redirect_to calendar_path(start_date: attributes[:date]), notice: 'You successfully checked in today!' }
         format.json { render :new }
       else
         format.html { render :new, alert: 'Please fix errors!' }
@@ -50,7 +51,7 @@ class WorkdaysController < ApplicationController
     end
     respond_to do |format|
       if @workday.update(attributes)
-        format.html { redirect_to calendar_path, notice: 'You successfully updated your work log!' }
+        format.html { redirect_to calendar_path(start_date: attributes[:date]), notice: 'You successfully updated your work log!' }
         format.json { render :new }
       else
         format.html { render :new, alert: 'Please fix errors!' }
