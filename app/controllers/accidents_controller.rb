@@ -53,7 +53,7 @@ class AccidentsController < ApplicationController
     @accident = Accident.find(email_params[:accident_id].to_i)
     @recipient = email_params[:email]
     if email_params[:email].match(/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
-      UserMailer.with(user: @user, accident: @accident, recipient: @recipient).send_accident.deliver_later
+      UserMailer.with(user: @user, accident: @accident, recipient: @recipient).send_accident.deliver_now
     else
       render :complete
     end

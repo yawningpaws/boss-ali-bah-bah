@@ -10,7 +10,7 @@
 <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
 <% end %>
 
-<%= turbo_frame_tag dom_id(@accident) do %>
+<%= turbo_frame_tag "email" do %>
 <div class="container">
   <h4>Send the report as an email</h4>
   <form action="/accidents/send" method="post">
