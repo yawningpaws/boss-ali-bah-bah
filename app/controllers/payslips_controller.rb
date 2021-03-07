@@ -9,7 +9,8 @@ class PayslipsController < ApplicationController
 
     respond_to do |format|
       if @payslip.save
-        format.html { redirect_to calendar_path, notice: 'You successfully logged your salary!' }
+        start_date = "#{payslip_params[:year]}-#{payslip_params[:month]}-01"
+        format.html { redirect_to calendar_path(start_date: start_date), notice: 'You successfully logged your salary!' }
         format.json { render :new }
       else
         format.html { render :new, alert: 'Please fix errors!' }
