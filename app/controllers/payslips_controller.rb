@@ -40,6 +40,6 @@ class PayslipsController < ApplicationController
   private
 
   def payslip_params
-    params.require(:payslip).permit(:month, :year, :amount, :payment_method, :photo)
+    params.require(:payslip).permit(:month, :year, :amount, :payment_method, :photos)
   end
 end
