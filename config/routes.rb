@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   get '/onboarding', to: 'users#onboarding', as: 'onboarding'
+  get '/landing', to: 'pages#landing'
   patch '/contract_update', to: 'users#contract_update', as: 'contract_update'
   get '/personal_details', to: 'users#personal_details', as: 'personal_details'
   patch '/personal_update', to: 'users#personal_update', as: 'personal_update'
