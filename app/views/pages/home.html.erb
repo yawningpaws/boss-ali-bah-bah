@@ -70,8 +70,8 @@
 <div style="background-color:#262737" class="p-4 mb-5">
   <div class="container">
     <%= link_to 'Log my work hours', new_workday_path, class: 'btn btn-block btn-green my-3 text-dark' %>
-    <%= link_to 'Add salary', '#', class: 'btn btn-block btn-green my-3 text-dark' %>
-    <%= link_to 'I am injured', '#', class: 'btn btn-block btn-green my-3 text-dark' %>
+    <%= link_to 'Add salary', new_payslip_path, class: 'btn btn-block btn-green my-3 text-dark' %>
+    <%= link_to 'I am injured', new_accident_path, class: 'btn btn-block btn-green my-3 text-dark' %>
     <br>
     <% if user_signed_in? %>
     <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-blue center", data: { turbo: false }  %>
