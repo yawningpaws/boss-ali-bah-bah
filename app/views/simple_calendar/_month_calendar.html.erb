@@ -9,8 +9,8 @@
     <% end %>
   </div>
 
-  <table class="table table-striped">
-    <thead>
+  <table class="table table-borderless bg-white">
+    <thead class="thead-dark">
       <tr>
         <% date_range.slice(0, 7).each do |day| %>
           <th style="vertical-align:middle; text-align:center;"><%= t('date.abbr_day_names')[day.wday] %></th>
