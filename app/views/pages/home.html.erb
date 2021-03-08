@@ -1,14 +1,29 @@
-<div class="container">
-  <div class="card-product mb-3 mt-3">
-    <div class="square border border-dark">
-      <h5 class= "block text-center text-white bg-dark border border-dark"><%=  (Date::MONTHNAMES[Date.today.mon]).capitalize%></h5>
-      <h1 class= "text-center" style="line-height: 80px"><%=  Date.today.day%></h1>
+<div class="container ">
+  <div class="d-flex parent">
+    <div class="card-product mb-3 mt-3 round square">
+      <div class="square border-dark round">
+        <h5 class= "text-center text-white border-dark square" style="background-color:#262737"><%=  (Date::MONTHNAMES[Date.today.mon]).capitalize%></h5>
+        <h1 class= "text-center" style="line-height: 80px"><%=  Date.today.day%></h1>
+      </div>
     </div>
-    <div class="card-product-infos">
+    <div class="child">
+      <% if @workday_checkedin.nil? %>
+      <span class="badge badge-danger">!</span>
+      <strong><u><%= link_to 'Please check in here', new_workday_path,class: "text-blue" %></u></strong>
+      <% elsif (@workday_checkedin.on_mc) %>
+      <p class= "text-blue text-center">Get well soon 🙏</p>
+      <% elsif (@workday_checkedin.on_rest) %>
+      <p class= "text-blue text-center">Enjoy your rest day 🤗 </p>
+      <% else %>
+      <p class= "text-blue text-center">You're good today 👍 </p>
+      <% end %>
+
     </div>
+
   </div>
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+  <div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -17,7 +32,7 @@
     <div class="carousel-inner" style=" width:100%; height: 500px !important;">
       <div class="carousel-item active">
         <a href="https://twc2.org.sg/2021/02/10/furious-employer-pressures-worker-to-go-home-after-hes-injured/" target="_blank">
-         <img class="d-block w-100" src="https://twc2.org.sg/wp-content/uploads/2021/02/uddin_m_mohir_tarts_313_2639q.jpg" alt="First slide">
+         <img class="d-block w-100 caro-image" src="https://twc2.org.sg/wp-content/uploads/2021/02/uddin_m_mohir_tarts_313_2639q.jpg" alt="First slide">
          <div class="carousel-caption">
           <p>Dengue fever leads to whim and spite, all blessed by government policy</p>
         </div>
@@ -25,7 +40,7 @@
     </div>
     <div class="carousel-item">
       <a href="https://twc2.org.sg/2021/02/28/straits-times-migrant-burden-background-and-commentary/" target="_blank">
-        <img class="d-block w-100" src="https://twc2.org.sg/wp-content/uploads/2021/02/migrantburden_sect_1.jpg" alt="First slide">
+        <img class="d-block w-100 caro-image" src="https://twc2.org.sg/wp-content/uploads/2021/02/migrantburden_sect_1.jpg" alt="First slide">
         <div class="carousel-caption">
           <p>97 percent of employers of dorm-based workers now paid through bank</p>
         </div>
@@ -35,7 +50,7 @@
 
     <div class="carousel-item">
      <a href="https://twc2.org.sg/2021/02/27/mom-help-me-says-yasser-declining-twc2-assistance/" target="_blank">
-      <img class="d-block w-100" src="https://twc2.org.sg/wp-content/uploads/2021/03/yasser_476_2696k.png" alt="First slide">
+      <img class="d-block w-100 caro-image" src="https://twc2.org.sg/wp-content/uploads/2021/03/yasser_476_2696k.png" alt="First slide">
       <div class="carousel-caption">
         <p>“MOM help me,” says Yasser, declining TWC2 assistance</p>
       </div>
@@ -51,12 +66,16 @@
   <span class="sr-only">Next</span>
 </a>
 </div>
-<div>
-  <%= link_to 'Log my work hours', new_workday_path, class: 'btn btn-secondary btn-block my-3' %>
 </div>
-<div>
- <%= link_to 'Add salary', '#', class: 'btn btn-secondary btn-block my-3' %>
- <%= link_to 'I am injured', '#', class: 'btn btn-secondary btn-block my-3' %>
+<div style="background-color:#262737" class="p-4 mb-5">
+  <div class="container">
+    <%= link_to 'Log my work hours', new_workday_path, class: 'btn btn-block btn-green my-3 text-dark' %>
+    <%= link_to 'Add salary', new_payslip_path, class: 'btn btn-block btn-green my-3 text-dark' %>
+    <%= link_to 'I am injured', new_accident_path, class: 'btn btn-block btn-green my-3 text-dark' %>
+    <br>
+    <% if user_signed_in? %>
+    <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-blue center", data: { turbo: false }  %>
+    <% end %>
+  </div>
 </div>
 
-</div>

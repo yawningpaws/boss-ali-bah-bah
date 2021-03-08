@@ -1,7 +1,7 @@
 class WorkdaysController < ApplicationController
   def new
     @workday = Workday.new
-    @workdays_dates = Workday.all.map do |day|
+    @workdays_dates = Workday.where(user: current_user).map do |day|
       day.date
     end
 

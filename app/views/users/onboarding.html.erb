@@ -1,8 +1,8 @@
 <%= turbo_frame_tag "edit-profile" do %>
 <div class="container" id="capture">
   <div class="bg-secondary mt-5 d-flex w-100 justify-content-between align-items-center" style="height:5px">
-    <div class="bg-dark rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="align-middle">1</p>  </div>
-    <div class="bg-primary rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="text-secondary">2</p> </div>
+    <div class="btn-green rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="align-middle text-white">1</p>  </div>
+    <div class="btn-green rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="text-white">2</p> </div>
     <div class="bg-dark rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="text-secondary">3</p> </div>
   </div>
   <br><br>
@@ -10,17 +10,37 @@
   <div>
     <%= simple_form_for current_user, url: 'contract_update' do |f| %>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#ipa" role="tab" aria-controls="home" aria-selected="true">Upload IPA Photo</a>
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Take IPA photo</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Upload IPA contract</a>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
-      <div class="tab-pane fade show active" id="ipa" role="tabpanel" aria-labelledby="home-tab">
-        <%= f.input :ipa_photo%>
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">     <%= f.input :ipa_photo, as: :hidden%>
+        <div class="camera" >
+          <video id="off" style = "display:none">Video stream not available.</video>
+        </div>
+        <canvas id="canvas" style="display: none">
+        </canvas>
+        <div class="output">
+          <img id="photo" alt="The screen capture will appear in this box." style="display: none">
+        </div>
+        <div style="text-align: center;">
+         <div class="camera mb-3">
+          <button id="startbutton" data-turbo="false" class='btn border border-dark'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>Take picture</button>
+
+          <button id="switch-camera" data-turbo="false" class='btn border border-dark'><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20 4h-3.17L15 2H9L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 11.5V13H9v2.5L5.5 12 9 8.5V11h6V8.5l3.5 3.5-3.5 3.5z"/></svg>Switch camera</button>
+        </div>
+      </div>
+
     </div>
+    <div class="tab-pane fade mt-3" id="profile" role="tabpanel" aria-labelledby="profile-tab"><%= f.input :ipa_photo, label: false%></div>
   </div>
 
-  <%= f.button :submit, class: 'btn btn-primary btn-block', value: 'Upload' %>
+
+  <%= f.button :submit, class: 'btn btn-blue btn-block text-white', value: 'Upload' %>
   <% end %>
 
   <%= link_to 'Skip', personal_details_path, class: 'btn btn-secondary btn-block my-3' %>
