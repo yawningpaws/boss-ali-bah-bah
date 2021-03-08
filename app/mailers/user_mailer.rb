@@ -2,7 +2,6 @@ class UserMailer < ApplicationMailer
   default from: 'notification@example.com'
 
   def send_accident
-    binding.pry
     @recipient = params[:recipient]
     @user = params[:user]
     @accident = params[:accident]

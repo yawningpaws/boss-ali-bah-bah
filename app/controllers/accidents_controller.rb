@@ -48,7 +48,6 @@ class AccidentsController < ApplicationController
   end
 
   def send_accident
-    binding.pry
     @user = current_user
     @accident = Accident.find(email_params[:accident_id].to_i)
     @recipient = email_params[:email]
