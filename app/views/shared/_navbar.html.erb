@@ -58,10 +58,14 @@
     <i class="far fa-question-circle fa-2x"></i><br>
     Help
     <% end %>
-    <%= link_to root_path, data: { turbo: false }, class: 'text-center' do %>
+    <%
+=begin%>
+ <%= link_to root_path, data: { turbo: false }, class: 'text-center' do %>
     <i class="fas fa-sign-out-alt fa-2x"></i><br>
     Logout
     <% end %>
+<%
+=end%>
   </div>
 </nav>
 <% %>
