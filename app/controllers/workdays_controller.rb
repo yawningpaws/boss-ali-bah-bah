@@ -72,6 +72,16 @@ class WorkdaysController < ApplicationController
     @workday = Workday.find(params[:id])
   end
 
+  def notifications
+    # if the current user did not check in
+    # in today's date
+    #@checked_in = current_user.workdays.any? { |workday| workday.date == Date.today }
+    @checked_in = false
+    respond_to do |f|
+      f.json { render json: { checked_in: @checked_in } }
+    end
+  end
+
   private
 
   def workday_params

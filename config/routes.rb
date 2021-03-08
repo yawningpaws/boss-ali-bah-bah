@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'workdays/on_leave', to: 'workdays#on_leave'
   get 'workdays/on_leave/:id', to: 'workdays#on_leave'
   get 'workdays/working/:id', to: 'workdays#working'
-
+  get 'workday_notification', to: 'workdays#notifications'
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
