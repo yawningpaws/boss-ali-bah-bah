@@ -2,10 +2,9 @@
 <% months_values = (1..12).to_a %>
 <% months_with_values = months.zip(months_values) %>
 <% years = (2000..2050).to_a %>
-<% if params[:date] %>
-  <% date = params[:date].split('-') %>
-  <% default_month = date[1] %>
-  <% default_year = date[0] %>
+<% if params[:month] %>
+  <% default_month = params[:month].to_i %>
+  <% default_year = params[:year].to_i %>
 <% else %>
   <% default_month = Time.now.month %>
   <% default_year = Time.now.year %>

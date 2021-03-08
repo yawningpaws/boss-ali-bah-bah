@@ -76,10 +76,14 @@
         data-toggle="tooltip" data-placement="top" data-trigger="hover" title="<%= method_tooltip %>">
         By <%= payslip.payment_method %>
       </p>
-      <%= link_to "Edit", edit_payslip_path(payslip, date: payslip.date), class: "btn btn-primary" %>
+      <%= link_to "Edit", edit_payslip_path(payslip, month: payslip.month, year: payslip.year), class: "btn btn-primary" %>
     <% else %>
       <p class="my-0">Not received yet</p>
-      <%= link_to "Add", new_payslip_path, class: "btn btn-primary" %>
+      <% if start_date %>
+        <%= link_to "Add", new_payslip_path(month: start_date_arr[1], year:start_date_arr[0]), class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to "Add", new_payslip_path, class: "btn btn-primary" %>
+      <% end %>
     <% end %>
   </div>
 </div>
