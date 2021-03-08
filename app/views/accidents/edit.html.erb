@@ -12,7 +12,7 @@
 </div>
 <%= simple_form_for @accident do |f| %>
 <%= f.input :injured_part %>
-<%= f.input :medical_facility %>
+<%= f.input :medical_facility, as: :select, collection: ['None', 'Alexandria Hospital', 'Changi General Hospital', 'Khoo Teck Puat Hospital', 'National Skin Centre', 'National University Hospital', 'Ng Teng Fong General Hospital', 'Singapore General Hospital', 'Singapore National Eye Centre', 'Tan Tock Seng Hospital'] %>
 <%= f.submit 'Next', class: 'btn btn-block btn-primary mb-3' %>
 <% end %>
 <%= link_to "Back", new_accident_path(@accident), class: 'btn btn-block btn-warning' %>

@@ -11,8 +11,26 @@
   <p>Time: <%= @accident.time.strftime("%k:%M")%></p>
   <p>Description: <%= @accident.description%></p>
   <p>Part injured: <%= @accident.injured_part%></p>
-  <p>Place of Treatment: <%= @accident.medical_facility%></p>
-  <p> Treatment was paid by employer: <%= @accident.paid_by_employer ? 'Yes' : 'No' %></p>
+  <p>Place of Treatment: <%= @accident.medical_facility%><br>
+    <% if @accident.medical_facility == 'None' || nil %>
+      <small class="text-danger">*Employer should have sought proper medical care*</small>
+    <% end %>
+  </p>
+  <p>
+    Treatment was paid by employer: <%= @accident.paid_by_employer ? 'Yes' : 'No' %> <br>
+    <% unless @accident.paid_by_employer %>
+      <small class="text-danger">*Employer should have paid*</small>
+    <% end %>
+  </p>
+  <p>
+    No. of MC days: <%= @accident.mc_days %><br>
+      <% if @accident.mc_days == 0 || nil %>
+    <small class="text-danger">*MC should have been given*</small>
+    <% end %>
+  </p>
+  <% @accident.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
+  <% end %>
 </body>
 
 </html>

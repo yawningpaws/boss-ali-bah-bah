@@ -60,6 +60,8 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "boss_ali_bah_bah_production"
 
+  config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.default_url_options = { host: 'boss-ali-bah-bah.herokuapp.com' }
 
   config.action_mailer.perform_caching = false

@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get '/calendar', to: 'pages#calendar'
 
+  get '/accidents/confirm', to: 'accidents#confirm'
+  post '/accidents/send', to: 'accidents#send_accident'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :accidents do
     member do
@@ -11,7 +13,6 @@ Rails.application.routes.draw do
       get :complete
     end
   end
-  post '/accidents/send', to: 'accidents#send_accident'
 
   get '/onboarding', to: 'users#onboarding', as: 'onboarding'
   get '/landing', to: 'pages#landing'
