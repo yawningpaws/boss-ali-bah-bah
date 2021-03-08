@@ -4,24 +4,39 @@
 <p>Time: <%= @accident.time.strftime("%k:%M")%></p>
 <p>Description: <%= @accident.description%></p>
 <p>Part injured: <%= @accident.injured_part%></p>
-<p>Place of Treatment: <%= @accident.medical_facility%></p>
-<p> Treatment was paid by employer: <%= @accident.paid_by_employer ? 'Yes' : 'No' %></p>
+<p>Place of Treatment: <%= @accident.medical_facility%><br>
+  <% if @accident.medical_facility == 'None' || nil %>
+    <small class="text-danger">*Employer should have sought proper medical care*</small>
+  <% end %>
+  </p>
+<p>
+  Treatment was paid by employer: <%= @accident.paid_by_employer ? 'Yes' : 'No' %> <br>
+  <% unless @accident.paid_by_employer %>
+  <small class="text-danger">*Employer should have paid*</small>
+  <% end %>
+</p>
+<p>
+  No. of MC days: <%= @accident.mc_days %><br>
+  <% if @accident.mc_days == 0 || nil %>
+  <small class="text-danger">*MC should have been given*</small>
+  <% end %>
+</p>
 <% @accident.photos.each do |photo| %>
-<%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<%= cl_image_tag photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
 <% end %>
 
 <%= turbo_frame_tag "email" do %>
-<div class="container">
+<div class="container py-3">
   <h4>Send the report as an email</h4>
   <form action="/accidents/send" method="post">
     <label for="email">Email address:</label><br>
-    <input type="text" id="email" name="email"><br>
+    <input type="text" id="email" name="email" class="w-100"><br>
     <input type="hidden" name="accident_id" value="<%= @accident.id %>">
     <%= button_to "Send Email", accidents_send_path(@accident) %>
   </form>
 </div>
 <% end %>
 
-<%= link_to 'Go to home', root_path, class: 'btn btn-block btn-primary', data: { turbo: false }  %>
+<%= link_to 'Confirm and go to home', accidents_confirm_path, class: 'btn btn-block btn-primary', data: { turbo: false }  %>
 <%= link_to "Edit", new3_accident_path(@accident), class: 'btn btn-block btn-warning mb-3' %>
 <% end %>

@@ -27,11 +27,11 @@ class AccidentsController < ApplicationController
     @accident = Accident.find(params[:id])
     if @accident.update!(accident_params)
       if accident_params[:date]
+        @hospitals = ['Alexandria Hospital', 'Changi General Hospital', 'Khoo Teck Puat Hospital', 'National Skin Centre', 'National University Hospital', 'Ng Teng Fong General Hospital', 'Singapore General Hospital', 'Singapore National Eye Centre', 'Tan Tock Seng Hospital']
         redirect_to edit_accident_path(@accident)
       elsif accident_params[:injured_part]
         redirect_to new3_accident_path(@accident)
       else
-        session[:accident] = nil
         redirect_to complete_accident_path(@accident)
       end
     else
@@ -56,6 +56,11 @@ class AccidentsController < ApplicationController
     else
       render :complete
     end
+  end
+
+  def confirm
+    session[:accident] = nil
+    redirect_to root_path
   end
 
   private
