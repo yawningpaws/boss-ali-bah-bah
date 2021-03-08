@@ -2,13 +2,20 @@
 <% months_values = (1..12).to_a %>
 <% months_with_values = months.zip(months_values) %>
 <% years = (2000..2050).to_a %>
-<% current_month = Time.now.month %>
-<% current_year = Time.now.year %>
+<% if params[:date] %>
+  <% date = params[:date].split('-') %>
+  <% default_month = date[1] %>
+  <% default_year = date[0] %>
+<% else %>
+  <% default_month = Time.now.month %>
+  <% default_year = Time.now.year %>
+<% end %>
+
 
 <div class="container my-3">
   <%= simple_form_for @payslip do |f| %>
-    <%= f.input :month, label: 'Salary for month', collection: months_with_values, selected: current_month %>
-    <%= f.input :year, label: 'Year', collection: years, selected: current_year %>
+    <%= f.input :month, label: 'Salary for month', collection: months_with_values, selected: default_month %>
+    <%= f.input :year, label: 'Year', collection: years, selected: default_year %>
     <%= f.input :amount, label: 'Amount received' %>
     <%= f.input :payment_method, as: :radio_buttons, collection: ["bank transfer", "cash", "both"] %>
     <%= f.input :photo, as: :file, label: 'Photo of payslip or bank statement', as: :file %>
