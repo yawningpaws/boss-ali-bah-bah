@@ -78,7 +78,7 @@
       </p>
       <%= link_to "Edit", edit_payslip_path(payslip, month: payslip.month, year: payslip.year), class: "btn btn-primary" %>
     <% else %>
-      <p class="my-0">Not received yet</p>
+      <p>Not received yet</p>
       <% if start_date %>
         <%= link_to "Add", new_payslip_path(month: start_date_arr[1], year:start_date_arr[0]), class: "btn btn-primary" %>
       <% else %>

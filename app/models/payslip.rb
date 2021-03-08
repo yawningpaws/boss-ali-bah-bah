@@ -1,6 +1,6 @@
 class Payslip < ApplicationRecord
   belongs_to :user
-  has_one_attached :photo
+  has_many_attached :photos
 
   validates :month, presence: true, inclusion: { in: (1..12) }
   validates :year, presence: true
