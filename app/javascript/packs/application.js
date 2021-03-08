@@ -28,7 +28,10 @@ import "bootstrap";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 import { initFlatpickr } from '../plugins/init_flatpickr';
+//import { initCamera} from '../plugins/init_camera.js';
+
 //import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
+import { initTooltip } from '../plugins/init_tooltip';
 import "controllers";
 import "../plugins/register_serviceworker.js";
 import "../plugins/notifications.js";
@@ -41,5 +44,7 @@ document.addEventListener('turbo:load', () => {
   initNotif();
   //initWebrtcPhoto();
   // displayNotification();
+  //initCamera();
+  initTooltip();
 });
 

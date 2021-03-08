@@ -8,5 +8,4 @@ class User < ApplicationRecord
   has_many :accidents, dependent: :destroy
   has_many :workdays, dependent: :destroy
   has_one_attached :ipa_photo
-  has_many_attached :contract_photos
 end

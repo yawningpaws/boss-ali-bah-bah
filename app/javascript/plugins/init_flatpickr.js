@@ -5,6 +5,29 @@ const initFlatpickr = () => {
   if (datepicker) {
     flatpickr(datepicker, {});
   }
+  const accidentDateField = document.getElementById('accident_date')
+  if (accidentDateField) {
+    const currentDate = new Date()
+    flatpickr(accidentDateField, {
+      dateFormat: "Y-m-d",
+      altInput: true,
+      altFormat: "F j, Y",
+      defaultDate: currentDate,
+      disableMobile: true
+    })
+  }
+  // const accidentTimeField = document.getElementById('accident_time')
+  // if (accidentTimeField) {
+  //   const currentDate = new Date()
+  //   const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`
+  //   flatpickr(accidentTimeField, {
+  //     enableTime: true,
+  //     noCalendar: true,
+  //     time_24hr: true,
+  //     dateFormat: "H:i",
+  //     defaultDate: currentTime
+  //   })
+  // }
 
   const workdayForm = document.querySelector('#workday-form-dates')
   const workdayDate = document.querySelector('#workday_date');
@@ -16,21 +39,50 @@ const initFlatpickr = () => {
         altInput: true,
         altFormat: "F j, Y",
         defaultDate: clickedDate,
-        enable: [clickedDate]
+        enable: [clickedDate],
+        disableMobile: true
       });
     } else {
-      currentDate = new Date();
+      const currentDate = new Date();
       flatpickr(workdayDate, {
         dateFormat: "Y-m-d",
         altInput: true,
         altFormat: "F j, Y",
         defaultDate: currentDate,
-        disable: JSON.parse(workdayForm.dataset.completedDates)
+        disable: JSON.parse(workdayForm.dataset.completedDates),
+        disableMobile: true
       });
     }
-
-
   }
 }
+
+// const accidentDate = () => {
+//   const accidentDateField = document.getElementById('accident_date')
+//   if (accidentDateField) {
+//     const currentDate = new Date()
+//     flatpickr(accidentDateField, {
+//       dateFormat: "Y-m-d",
+//       altInput: true,
+//       altFormat: "F j, Y",
+//       defaultDate: currentDate
+//     })
+//   }
+// }
+
+// const accidentTime = () => {
+//   const accidentTimeField = document.getElementById('accident_time')
+//   if (accidentTimeField) {
+//     const currentDate = new Date()
+//     const currentTime = `${currentDate.getHours()}:${currentDate.getMinutes()}`
+//     flatpickr(accidentTimeField, {
+//       enableTime: true,
+//       noCalendar: true,
+//       time_24hr: true,
+//       dateFormat: "H:i",
+//       defaultDate: currentTime
+//     })
+//   }
+
+// }
 
 export { initFlatpickr };

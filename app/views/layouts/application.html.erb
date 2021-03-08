@@ -2,7 +2,7 @@
 <html>
 <!-- Don't forget to update the nonav layout too -->
 <head>
-  <title>BossAliBahBah</title>
+  <title>boss ali-bah-bah?</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
@@ -20,8 +20,10 @@
 </head>
 
 <body>
-  <%= render 'shared/navbar' %>
   <%= yield %>
+  <% if user_signed_in? %>
+  <%= render 'shared/navbar' %>
+  <% end %>
   <%= render 'shared/flashes' %>
 </body>
 

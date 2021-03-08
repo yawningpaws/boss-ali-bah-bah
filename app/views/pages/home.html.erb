@@ -1,4 +1,83 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<button id="btn">Test</button>
+<div class="container ">
+  <div class="d-flex parent">
+    <div class="card-product mb-3 mt-3 round square">
+      <div class="square border-dark round">
+        <h5 class= "text-center text-white border-dark square" style="background-color:#262737"><%=  (Date::MONTHNAMES[Date.today.mon]).capitalize%></h5>
+        <h1 class= "text-center" style="line-height: 80px"><%=  Date.today.day%></h1>
+      </div>
+    </div>
+    <div class="child">
+      <% if @workday_checkedin.nil? %>
+      <span class="badge badge-danger">!</span>
+      <strong><u><%= link_to 'Please check in here', new_workday_path,class: "text-blue" %></u></strong>
+      <% elsif (@workday_checkedin.on_mc) %>
+      <p class= "text-blue text-center">Get well soon 🙏</p>
+      <% elsif (@workday_checkedin.on_rest) %>
+      <p class= "text-blue text-center">Enjoy your rest day 🤗 </p>
+      <% else %>
+      <p class= "text-blue text-center">You're good today 👍 </p>
+      <% end %>
 
- <button id="btn">Test</button>
+    </div>
+
+  </div>
+
+
+  <div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" style=" width:100%; height: 500px !important;">
+      <div class="carousel-item active">
+        <a href="https://twc2.org.sg/2021/02/10/furious-employer-pressures-worker-to-go-home-after-hes-injured/" target="_blank">
+         <img class="d-block w-100 caro-image" src="https://twc2.org.sg/wp-content/uploads/2021/02/uddin_m_mohir_tarts_313_2639q.jpg" alt="First slide">
+         <div class="carousel-caption">
+          <p>Dengue fever leads to whim and spite, all blessed by government policy</p>
+        </div>
+      </a>
+    </div>
+    <div class="carousel-item">
+      <a href="https://twc2.org.sg/2021/02/28/straits-times-migrant-burden-background-and-commentary/" target="_blank">
+        <img class="d-block w-100 caro-image" src="https://twc2.org.sg/wp-content/uploads/2021/02/migrantburden_sect_1.jpg" alt="First slide">
+        <div class="carousel-caption">
+          <p>97 percent of employers of dorm-based workers now paid through bank</p>
+        </div>
+      </a>
+    </div>
+
+
+    <div class="carousel-item">
+     <a href="https://twc2.org.sg/2021/02/27/mom-help-me-says-yasser-declining-twc2-assistance/" target="_blank">
+      <img class="d-block w-100 caro-image" src="https://twc2.org.sg/wp-content/uploads/2021/03/yasser_476_2696k.png" alt="First slide">
+      <div class="carousel-caption">
+        <p>“MOM help me,” says Yasser, declining TWC2 assistance</p>
+      </div>
+    </a>
+  </div>
+</div>
+<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+</a>
+<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+</a>
+</div>
+</div>
+<div style="background-color:#262737" class="p-4 mb-5">
+  <div class="container">
+    <%= link_to 'Log my work hours', new_workday_path, class: 'btn btn-block btn-green my-3 text-dark' %>
+    <%= link_to 'Add salary', '#', class: 'btn btn-block btn-green my-3 text-dark' %>
+    <%= link_to 'I am injured', '#', class: 'btn btn-block btn-green my-3 text-dark' %>
+    <br>
+    <% if user_signed_in? %>
+    <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-blue center", data: { turbo: false }  %>
+    <% end %>
+  </div>
+</div>
+
+>>>>>>> c1a69bb93b558b766acc292d0aeddd0e646d4ad5
