@@ -47,9 +47,24 @@ class AccidentsController < ApplicationController
     @accident = Accident.find(params[:id])
   end
 
+  def send_accident
+    @user = current_user
+    @accident = Accident.find(email_params[:accident_id].to_i)
+    @recipient = email_params[:email]
+    if email_params[:email].match(/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+      UserMailer.with(user: @user, accident: @accident, recipient: @recipient).send_accident.deliver_now
+    else
+      render :complete
+    end
+  end
+
   private
 
   def accident_params
     params.require(:accident).permit(:date, :time, :description, :injured_part, :medical_facility, :paid_by_employer, :mc_days, photos: [])
+  end
+
+  def email_params
+    params.permit(:email, :accident_id)
   end
 end
