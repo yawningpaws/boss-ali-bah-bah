@@ -1,0 +1,85 @@
+<div class="container my-3 scrollable">
+  <%= month_calendar(events: @workdays) do |date, workdays| %>
+    <% if workdays.empty? %>
+      <%= link_to "#{new_workday_path}?#{date}" do %>
+        <%= date.day %>
+      <% end %>
+    <% else %>
+      <% workdays.each do |workday| %>
+        <div>
+          <%= link_to "#{edit_workday_path(workday)}?#{date}" do %>
+          <% if workday.on_rest %>
+            <div class="bg-primary rounded-circle calendar-circle date"><%= date.day %></div>
+          <% elsif workday.on_mc %>
+            <div class="bg-warning rounded-circle calendar-circle date"><%= date.day %></div>
+          <% else %>
+            <div class="bg-success rounded-circle d-flex calendar-circle date"><%= date.day %></div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  <!-- legend -->
+  <div class="d-flex justify-content-around">
+    <div class="d-flex align-items-center">
+      <div class="bg-success rounded-circle calendar-circle-small m-0"></div>
+      <p class="my-0 mx-1">Work day</p>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="bg-primary rounded-circle calendar-circle-small m-0"></div>
+      <p class="my-0 mx-1">Rest day</p>
+    </div>
+    <div class="d-flex align-items-center">
+      <div class="bg-warning rounded-circle  calendar-circle-small m-0"></div>
+      <p class="my-0 mx-1">On MC</p>
+    </div>
+  </div>
+
+  <div class="my-3 py-3 bg-white" style="text-align: center;">
+    <h5>Salary</h5>
+
+    <% start_date = params[:start_date] %>
+    <!-- current month calendar doesnt have 'start_date' in url -->
+    <% if start_date %>
+      <% start_date_arr = start_date.split('-').map(&:to_i) %>
+      <% payslip = @payslips.find_by(month: start_date_arr[1], year: start_date_arr[0]) %>
+    <% else %>
+      <% payslip = @payslips.find_by(month: Time.now.month, year: Time.now.year) %>
+    <% end %>
+
+
+
+    <% if payslip %>
+      <!-- color font according to whether salary is fully paid -->
+      <% if payslip.amount >= @basic_salary %>
+        <% amount_color = "text-success"  %>
+        <% amount_tooltip = 'Boss no ali-bah-bah! 👍' %>
+      <% else %>
+        <% amount_color = "text-danger"  %>
+        <% amount_tooltip = "Boss may be underpaying you. Seek help." %>
+      <% end %>
+
+      <% if payslip.payment_method == "bank transfer" %>
+        <% method_color = "text-success"  %>
+        <% method_tooltip = 'Boss no ali-bah-bah! 👍' %>
+      <% else %>
+        <% method_color = "text-danger"  %>
+        <% method_tooltip = "Boss must pay by bank transfer. Seek help." %>
+      <% end %>
+
+      <p class="my-0 <%= amount_color %>"
+        data-toggle="tooltip" data-placement="top" data-trigger="hover" title="<%= amount_tooltip %>">
+        Received $<%= payslip.amount %>
+      </p>
+      <p class="<%= method_color %>"
+        data-toggle="tooltip" data-placement="top" data-trigger="hover" title="<%= method_tooltip %>">
+        By <%= payslip.payment_method %>
+      </p>
+      <%= link_to "Edit", edit_payslip_path(payslip), class: "btn btn-primary" %>
+    <% else %>
+      <p class="my-0">Not received yet</p>
+      <%= link_to "Add", new_payslip_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
