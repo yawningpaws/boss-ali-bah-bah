@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+
+<body>
+  <h2>Accident info for <%= @user.name %></h2>
+  <p>Date: <%= @accident.date %></p>
+  <p>Time: <%= @accident.time.strftime("%k:%M")%></p>
+  <p>Description: <%= @accident.description%></p>
+  <p>Part injured: <%= @accident.injured_part%></p>
+  <p>Place of Treatment: <%= @accident.medical_facility%></p>
+  <p> Treatment was paid by employer: <%= @accident.paid_by_employer ? 'Yes' : 'No' %></p>
+</body>
+
+</html>

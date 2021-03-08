@@ -7,7 +7,19 @@
 <p>Place of Treatment: <%= @accident.medical_facility%></p>
 <p> Treatment was paid by employer: <%= @accident.paid_by_employer ? 'Yes' : 'No' %></p>
 <% @accident.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
+<% end %>
+
+<%= turbo_frame_tag "email" do %>
+<div class="container">
+  <h4>Send the report as an email</h4>
+  <form action="/accidents/send" method="post">
+    <label for="email">Email address:</label><br>
+    <input type="text" id="email" name="email"><br>
+    <input type="hidden" name="accident_id" value="<%= @accident.id %>">
+    <%= button_to "Send Email", accidents_send_path(@accident) %>
+  </form>
+</div>
 <% end %>
 
 <%= link_to 'Go to home', root_path, class: 'btn btn-block btn-primary', data: { turbo: false }  %>

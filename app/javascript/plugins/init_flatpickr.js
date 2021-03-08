@@ -39,20 +39,20 @@ const initFlatpickr = () => {
         altInput: true,
         altFormat: "F j, Y",
         defaultDate: clickedDate,
-        enable: [clickedDate]
+        enable: [clickedDate],
+        disableMobile: true
       });
     } else {
-      currentDate = new Date();
+      const currentDate = new Date();
       flatpickr(workdayDate, {
         dateFormat: "Y-m-d",
         altInput: true,
         altFormat: "F j, Y",
         defaultDate: currentDate,
-        disable: JSON.parse(workdayForm.dataset.completedDates)
+        disable: JSON.parse(workdayForm.dataset.completedDates),
+        disableMobile: true
       });
     }
-
-
   }
 }
 
