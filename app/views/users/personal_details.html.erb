@@ -1,12 +1,12 @@
 <%= turbo_frame_tag 'edit-profile' do %>
 <div class="container">
   <div class="bg-secondary mt-5 d-flex w-100 justify-content-between align-items-center" style="height:5px">
-    <div class="bg-dark rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="align-middle">1</p>  </div>
-    <div class="bg-dark rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="text-secondary">2</p> </div>
-    <div class="bg-primary rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="text-secondary">3</p> </div>
+    <div class="btn-green rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="align-middle text-white">1</p>  </div>
+    <div class="btn-green rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="text-white">2</p> </div>
+    <div class="btn-green rounded-circle text-center" style="height: 50px; width: 50px; line-height: 50px"> <p class="text-white">3</p> </div>
   </div>
   <br><br>
-  <h2 class ="text-center">Personal details</h2>
+  <h2 class ="text-center text-blue">Personal details</h2>
   <%= simple_form_for current_user, url: 'personal_update', data: { turbo_frame: '_top' } do |f| %>
   <%= f.input :name %>
   <%= f.input :phone_number %>

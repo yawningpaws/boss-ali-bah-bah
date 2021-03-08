@@ -1,4 +1,4 @@
-const initCamera= () => {
+const initCamera = () => {
   const startbutton = document.getElementById('startbutton');
   console.log(startbutton)
   if(startbutton) {
