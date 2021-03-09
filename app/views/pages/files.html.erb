@@ -15,8 +15,54 @@
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="worklog" role="tabpanel" aria-labelledby="worklog-tab">...</div>
-    <div class="tab-pane fade" id="salary" role="tabpanel" aria-labelledby="salary-tab">...</div>
+    <div class="tab-pane fade show active" id="worklog" role="tabpanel" aria-labelledby="worklog-tab">
+
+      <% @workdays.each_pair do |key, value| %>
+      <button class="btn btn-secondary btn-block dropdown-toggle" type="button" data-toggle="collapse" data-target="#<%= key.strftime("%B_%Y") %>" aria-expanded="false" aria-controls="worklog_<%= key.strftime("%B_%Y") %>">
+        Worklog for <%= key.strftime("%B, %Y") %>
+      </button>
+      <div class="collapse" id="<%= key.strftime("%B_%Y") %>">
+        <div class="card card-body">
+          <%= turbo_frame_tag "worklog_email" do %>
+          <h4>Email log as csv</h4>
+          <form action="/workdays/send" method="post" id="log">
+            <label for="email">Email address:</label><br>
+            <input type="text" id="email" name="email" class="w-100"><br>
+            <input type="hidden" name="log_key" value="<%= key %>">
+            <button type="submit" form="log" value="Submit" class="btn btn-success mt-2">Submit</button>
+          </form>
+          <% end %>
+
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+    <div class="tab-pane fade" id="salary" role="tabpanel" aria-labelledby="salary-tab">
+      <% @payslips.each_with_index do |payslip, index| %>
+      <button class="btn btn-secondary btn-block dropdown-toggle" type="button" data-toggle="collapse" data-target="#payslip_<%= index %>" aria-expanded="false" aria-controls="payslip_<%= index %>">
+        <%= Date::MONTHNAMES[payslip.month] %> <%= payslip.year %>
+      </button>
+      <div class="collapse" id="payslip_<%= index %>">
+        <div class="card card-body">
+          <p>Amount: <%= payslip.amount  %></p>
+          <p>Paid by: <%= payslip.payment_method %></p>
+          <% payslip.photos.each do |photo| %>
+          <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
+          <% end %>
+          <%= turbo_frame_tag "payslip_email" do %>
+          <h4>Send payslip details as email</h4>
+          <form action="/payslips/send" method="post" id="payslip">
+            <label for="email">Email address:</label><br>
+            <input type="text" id="email" name="email" class="w-100"><br>
+            <input type="hidden" name="paylsip_id" value="<%= payslip.id %>">
+            <button type="submit" form="log" value="Submit" class="btn btn-success mt-2">Submit</button>
+          </form>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
     <div class="tab-pane fade" id="accident" role="tabpanel" aria-labelledby="accident-tab">
       <% @accidents.each_with_index do |accident, index| %>
       <button class="btn btn-secondary btn-block dropdown-toggle" type="button" data-toggle="collapse" data-target="#accident_<%= index %>" aria-expanded="false" aria-controls="accident_<%= index %>">
@@ -64,6 +110,16 @@
       </div>
       <% end %>
     </div>
-    <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">...</div>
+    <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">
+      <%= cl_image_tag @user.ipa_photo, crop: :fit, class: 'w-100'%>
+      <%= turbo_frame_tag "ipa_email" do %>
+      <h4>Send IPA as email</h4>
+      <form action="/users/send" method="post" id="ipa">
+        <label for="email">Email address:</label><br>
+        <input type="text" id="email" name="email" class="w-100"><br>
+        <button type="submit" form="ipa" value="Submit" class="btn btn-success mt-2">Submit</button>
+      </form>
+      <% end %>
+    </div>
   </div>
 </div>
