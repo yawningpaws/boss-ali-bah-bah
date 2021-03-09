@@ -66,3 +66,6 @@ Rails.application.configure do
   # ngrok to test pwa on localhost
   config.hosts << /[a-z0-9]+\.ngrok\.io/
 end
+
+# for notifications
+Rails.application.routes.default_url_options[:host] = 'localhost:3000'

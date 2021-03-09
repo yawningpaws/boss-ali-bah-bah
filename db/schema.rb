@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_141637) do
+ActiveRecord::Schema.define(version: 2021_03_09_084347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,12 +65,15 @@ ActiveRecord::Schema.define(version: 2021_03_06_141637) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.boolean "seen"
-    t.text "content"
+    t.string "recipient_type", null: false
+    t.bigint "recipient_id", null: false
+    t.string "type", null: false
+    t.jsonb "params"
+    t.datetime "read_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_notifications_on_user_id"
+    t.index ["read_at"], name: "index_notifications_on_read_at"
+    t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
   create_table "organisations", force: :cascade do |t|
@@ -132,7 +135,6 @@ ActiveRecord::Schema.define(version: 2021_03_06_141637) do
   add_foreign_key "accidents", "users"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "notifications", "users"
   add_foreign_key "payslips", "users"
   add_foreign_key "workdays", "accidents"
   add_foreign_key "workdays", "users"
