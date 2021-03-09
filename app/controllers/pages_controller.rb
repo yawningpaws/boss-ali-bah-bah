@@ -12,4 +12,8 @@ class PagesController < ApplicationController
     @payslips = Payslip.where(user: current_user)
     @basic_salary = current_user.basic_salary
   end
+
+  def files
+    @accidents = Accident.where(user: current_user).sort_by(&:date).reverse
+  end
 end

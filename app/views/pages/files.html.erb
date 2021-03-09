@@ -1,0 +1,69 @@
+<div class="container scrollable">
+  <h1 class="text-center pt-3">Your files</h1>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="worklog-tab" data-toggle="tab" href="#worklog" role="tab" aria-controls="worklog" aria-selected="true">Worklogs</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="salary-tab" data-toggle="tab" href="#salary" role="tab" aria-controls="salary" aria-selected="false">Salary</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="accident-tab" data-toggle="tab" href="#accident" role="tab" aria-controls="accident" aria-selected="false">Accidents</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="contract-tab" data-toggle="tab" href="#contract" role="tab" aria-controls="contract" aria-selected="false">IPA</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="worklog" role="tabpanel" aria-labelledby="worklog-tab">...</div>
+    <div class="tab-pane fade" id="salary" role="tabpanel" aria-labelledby="salary-tab">...</div>
+    <div class="tab-pane fade" id="accident" role="tabpanel" aria-labelledby="accident-tab">
+      <% @accidents.each_with_index do |accident, index| %>
+      <button class="btn btn-secondary btn-block dropdown-toggle" type="button" data-toggle="collapse" data-target="#accident_<%= index %>" aria-expanded="false" aria-controls="accident_<%= index %>">
+        <%= accident.injured_part %> injury on <%= accident.date %>
+      </button>
+      <div class="collapse" id="accident_<%= index %>">
+        <div class="card card-body">
+          <p>Date: <%= accident.date %></p>
+          <p>Time: <%= accident.time.strftime("%k:%M")%></p>
+          <p>Description: <%= accident.description%></p>
+          <p>Part injured: <%= accident.injured_part%></p>
+          <p>Place of Treatment: <%= accident.medical_facility%><br>
+            <% if accident.medical_facility == 'None' || nil %>
+            <small class="text-danger">*Employer should have sought proper medical care*</small>
+            <% end %>
+          </p>
+          <p>
+            Treatment was paid by employer: <%= accident.paid_by_employer ? 'Yes' : 'No' %> <br>
+            <% unless accident.paid_by_employer %>
+            <small class="text-danger">*Employer should have paid*</small>
+            <% end %>
+          </p>
+          <p>
+            No. of MC days: <%= accident.mc_days %><br>
+            <% if accident.mc_days == 0 || nil %>
+            <small class="text-danger">*MC should have been given*</small>
+            <% end %>
+          </p>
+          <% accident.photos.each do |photo| %>
+          <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
+          <% end %>
+
+          <%= turbo_frame_tag "email" do %>
+          <div class="border p-3 my-3">
+            <h4>Send the report as an email</h4>
+            <form action="/accidents/send" method="post">
+              <label for="email">Email address:</label><br>
+              <input type="text" id="email" name="email" class="w-100"><br>
+              <input type="hidden" name="accident_id" value="<%= accident.id %>">
+              <%= button_to "Send Email", accidents_send_path(@accident), class: 'btn btn-success mt-2' %>
+            </form>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">...</div>
+  </div>
+</div>

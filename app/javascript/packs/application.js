@@ -23,6 +23,7 @@ import "@hotwired/turbo-rails"
 
 // External imports
 import "bootstrap";
+import "bootstrap/dist/js/bootstrap.bundle";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';

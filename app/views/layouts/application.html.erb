@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <!-- Don't forget to update the nonav layout too -->
+
 <head>
   <title>boss ali-bah-bah?</title>
   <%= csrf_meta_tags %>
@@ -20,10 +21,10 @@
 </head>
 
 <body>
- <%= yield %>
- <% if user_signed_in? %>
- <%= render 'shared/navbar' %>
- <% end %>
+  <%= yield %>
+  <% if user_signed_in? %>
+  <%= render 'shared/navbar' %>
+  <% end %>
   <%= render 'shared/flashes' %>
 </body>
 
