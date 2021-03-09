@@ -41,7 +41,7 @@ document.addEventListener('turbo:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initFlatpickr();
-  initNotif();
+  // initNotif();
   //initWebrtcPhoto();
   // displayNotification();
   //initCamera();

@@ -24,9 +24,15 @@ Rails.application.routes.draw do
   get 'workdays/on_leave/:id', to: 'workdays#on_leave'
   get 'workdays/working/:id', to: 'workdays#working'
   get 'workday_notification', to: 'workdays#notifications'
-  require "sidekiq/web"
-  authenticate :user, ->(user) { user.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
   resources :payslips, only: [:new, :create, :edit, :update]
+
+  post 'serviceworker/subscribe', to: 'workdays#subscribe'
+  post 'workdays/notification', to: 'workdays#notification'
+
+  # require "sidekiq/web"
+  # authenticate :user, ->(user) { user.admin? } do
+  #   mount Sidekiq::Web => '/sidekiq'
+  # end
+
+  # post "/push", to: 'pages#notification'
 end

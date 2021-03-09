@@ -1,4 +1,6 @@
 class WorkdaysController < ApplicationController
+  protect_from_forgery except: [:notification, :subscribe]
+
   def new
     @workday = Workday.new
     @workdays_dates = Workday.all.map do |day|
@@ -75,11 +77,35 @@ class WorkdaysController < ApplicationController
   def notifications
     # if the current user did not check in
     # in today's date
-    #@checked_in = current_user.workdays.any? { |workday| workday.date == Date.today }
-    @checked_in = false
+    @checked_in = current_user.workdays.any? { |workday| workday.date == Date.today }
     respond_to do |f|
       f.json { render json: { checked_in: @checked_in } }
     end
+  end
+
+  def subscribe
+    if user_signed_in?
+      binding.pry
+      current_user.subscription = params[:subscription].to_json
+      current_user.save!
+    end
+  end
+
+  def notification
+    Webpush.payload_send(
+      message: params[:message],
+      endpoint: params[:subscription][:endpoint],
+      p256dh: params[:subscription][:keys][:p256dh],
+      auth: params[:subscription][:keys][:auth],
+      vapid: {
+        subject: "mailto:sender@example.com",
+        public_key: ENV['VAPID_PUBLIC_KEY'],
+        private_key: ENV['VAPID_PRIVATE_KEY']
+      },
+    ssl_timeout: 5, # value for Net::HTTP#ssl_timeout=, optional
+    open_timeout: 5, # value for Net::HTTP#open_timeout=, optional
+    read_timeout: 5 # value for Net::HTTP#read_timeout=, optional
+    )
   end
 
   private

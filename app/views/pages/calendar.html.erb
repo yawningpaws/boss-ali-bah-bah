@@ -9,11 +9,11 @@
         <div>
           <%= link_to "#{edit_workday_path(workday)}?#{date}" do %>
           <% if workday.on_rest %>
-            <div class="bg-primary rounded-circle calendar-circle date"><%= date.day %></div>
+            <div class="bg-blue rounded-circle calendar-circle date"><%= date.day %></div>
           <% elsif workday.on_mc %>
-            <div class="bg-warning rounded-circle calendar-circle date"><%= date.day %></div>
+            <div class="bg-pink rounded-circle calendar-circle date"><%= date.day %></div>
           <% else %>
-            <div class="bg-success rounded-circle d-flex calendar-circle date"><%= date.day %></div>
+            <div class="bg-green rounded-circle d-flex calendar-circle date"><%= date.day %></div>
             <% end %>
           <% end %>
         </div>

@@ -37,6 +37,7 @@ gem 'serviceworker-rails'
 gem "simple_calendar", "~> 2.4"
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
+gem 'webpush'
 
 group :development, :test do
   gem 'pry-byebug'

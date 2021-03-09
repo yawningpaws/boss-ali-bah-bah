@@ -1,4 +1,9 @@
-<button id="btn">Test</button>
+<button id="webpush-btn">Test</button>
+
+<script>
+  window.vapidPublicKey = new Uint8Array(<%= @decodedVapidPublicKey %>);
+</script>
+
 <div class="container ">
   <div class="d-flex parent">
     <div class="card-product mb-3 mt-3 round square">
@@ -79,5 +84,3 @@
     <% end %>
   </div>
 </div>
-
->>>>>>> c1a69bb93b558b766acc292d0aeddd0e646d4ad5
