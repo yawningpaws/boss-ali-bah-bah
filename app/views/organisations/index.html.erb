@@ -1,0 +1,14 @@
+<div class="container">
+  <div id="map" class = "mt-5" style="width: 100%; height: 300px;"data-markers="<%= @markers.to_json %>"data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+
+
+  <div class="dropdown mt-5">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Dropdown button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-organisations="<%= @organisations.to_json %>">
+    </div>
+  </div>
+</div>
+
