@@ -6,10 +6,12 @@ class PayslipsController < ApplicationController
   def create
     @payslip = Payslip.new(payslip_params)
     @payslip.user = current_user
+    payslip_params[:user_id] = current_user.id
 
     respond_to do |format|
       if @payslip.valid?
-        AttachPhotoJob.perform_now(@payslip)
+        # AttachPhotoJob.set(wait: 1.minute).perform_later(payslip_params)
+        @payslip.save
         start_date = "#{payslip_params[:year]}-#{payslip_params[:month]}-01"
         format.html { redirect_to calendar_path(start_date: start_date), notice: 'You successfully logged your salary!' }
         format.json { render :new }

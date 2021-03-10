@@ -43,3 +43,11 @@ document.addEventListener('turbo:load', () => {
   initTooltip();
 });
 
+document.addEventListener('turbo:submit-start', () => {
+  const spinner = document.querySelector('#spinner');
+  spinner.style.display = 'flex';
+});
+document.addEventListener('turbo:load', () => {
+  const spinner = document.querySelector('#spinner');
+  spinner.style.display = 'none';
+});

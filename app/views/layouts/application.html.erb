@@ -20,11 +20,14 @@
 </head>
 
 <body>
- <%= yield %>
- <% if user_signed_in? %>
- <%= render 'shared/navbar' %>
- <% end %>
-  <%= render 'shared/flashes' %>
+  <div class="my-0" style="position:relative;">
+    <%= yield %>
+    <% if user_signed_in? %>
+      <%= render 'shared/navbar' %>
+    <% end %>
+    <%= render 'shared/flashes' %>
+    <%= render 'shared/loading' %>
+  </div>
 </body>
 
 </html>

@@ -36,6 +36,8 @@ gem 'cloudinary', '~> 1.16.0'
 gem 'serviceworker-rails'
 gem "simple_calendar", "~> 2.4"
 gem 'noticed'
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
 
 group :development, :test do
   gem 'pry-byebug'
