@@ -25,11 +25,11 @@
         <div class="card card-body">
           <%= turbo_frame_tag "worklog_email" do %>
           <h4>Email log as csv</h4>
-          <form action="/workdays/send" method="post" id="log">
+          <form action="/workdays/send" method="post" id="log<%= key.strftime("%B_%Y") %>">
             <label for="email">Email address:</label><br>
             <input type="text" id="email" name="email" class="w-100"><br>
             <input type="hidden" name="log_key" value="<%= key %>">
-            <button type="submit" form="log" value="Submit" class="btn btn-success mt-2">Submit</button>
+            <button type="submit" form="log<%= key.strftime("%B_%Y") %>" value="Submit" class="btn btn-success mt-2">Submit</button>
           </form>
           <% end %>
 
@@ -52,11 +52,11 @@
           <% end %>
           <%= turbo_frame_tag "payslip_email" do %>
           <h4>Send payslip details as email</h4>
-          <form action="/payslips/send" method="post" id="payslip">
+          <form action="/payslips/send" method="post" id="payslip<%= payslip.id %>">
             <label for="email">Email address:</label><br>
             <input type="text" id="email" name="email" class="w-100"><br>
-            <input type="hidden" name="paylsip_id" value="<%= payslip.id %>">
-            <button type="submit" form="log" value="Submit" class="btn btn-success mt-2">Submit</button>
+            <input type="hidden" name="payslip_id" value="<%= payslip.id %>">
+            <button type="submit" form="payslip<%= payslip.id %>" value="Submit" class="btn btn-success mt-2">Submit</button>
           </form>
           <% end %>
         </div>
@@ -111,7 +111,9 @@
       <% end %>
     </div>
     <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">
-      <%= cl_image_tag @user.ipa_photo, crop: :fit, class: 'w-100'%>
+      <% if @user.ipa_photo %>
+      <%= cl_image_tag @user.ipa_photo.key, crop: :fit, class: 'w-100'%>
+      <% end %>
       <%= turbo_frame_tag "ipa_email" do %>
       <h4>Send IPA as email</h4>
       <form action="/users/send" method="post" id="ipa">

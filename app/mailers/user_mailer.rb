@@ -20,7 +20,7 @@ class UserMailer < ApplicationMailer
     @user = params[:user]
     @email = params[:email]
     @payslip = params[:payslip]
-    mail(to: @email, subject: "#{Date::MONTHNAMES[payslip.month]}, #{payslip.year} payslip for #{@user.name} ")
+    mail(to: @email, subject: "#{Date::MONTHNAMES[@payslip.month]}, #{@payslip.year} payslip for #{@user.name} ")
   end
 
   def send_ipa
