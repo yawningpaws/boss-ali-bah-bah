@@ -8,7 +8,8 @@ class PayslipsController < ApplicationController
     @payslip.user = current_user
 
     respond_to do |format|
-      if @payslip.save
+      if @payslip.valid?
+        AttachPhotoJob.perform_now(@payslip)
         start_date = "#{payslip_params[:year]}-#{payslip_params[:month]}-01"
         format.html { redirect_to calendar_path(start_date: start_date), notice: 'You successfully logged your salary!' }
         format.json { render :new }
@@ -40,6 +41,6 @@ class PayslipsController < ApplicationController
   private
 
   def payslip_params
-    params.require(:payslip).permit(:month, :year, :amount, :payment_method, :photos)
+    params.require(:payslip).permit(:month, :year, :amount, :payment_method, photos: [])
   end
 end
