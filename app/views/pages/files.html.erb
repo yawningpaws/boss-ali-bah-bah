@@ -27,7 +27,14 @@
           <h4>Email log as csv</h4>
           <form action="/workdays/send" method="post" id="log<%= key.strftime("%B_%Y") %>">
             <label for="email">Email address:</label><br>
-            <input type="text" id="email" name="email" class="w-100"><br>
+            <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
+            <datalist id="organisations">
+              <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
+              <option value="info@mysite.com">FF</option>
+              <option value="info@twc2.org.sg">Transient Workers Count too</option>
+              <option value="nurezlia@home.org.sg">HOME</option>
+              <option value="info@healthserve.org.sg">Health Serve</option>
+            </datalist>
             <input type="hidden" name="log_key" value="<%= key %>">
             <button type="submit" form="log<%= key.strftime("%B_%Y") %>" value="Submit" class="btn btn-success mt-2">Submit</button>
           </form>
@@ -54,7 +61,14 @@
           <h4>Send payslip details as email</h4>
           <form action="/payslips/send" method="post" id="payslip<%= payslip.id %>">
             <label for="email">Email address:</label><br>
-            <input type="text" id="email" name="email" class="w-100"><br>
+            <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
+            <datalist id="organisations">
+              <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
+              <option value="info@mysite.com">FF</option>
+              <option value="info@twc2.org.sg">Transient Workers Count too</option>
+              <option value="nurezlia@home.org.sg">HOME</option>
+              <option value="info@healthserve.org.sg">Health Serve</option>
+            </datalist><br>
             <input type="hidden" name="payslip_id" value="<%= payslip.id %>">
             <button type="submit" form="payslip<%= payslip.id %>" value="Submit" class="btn btn-success mt-2">Submit</button>
           </form>
@@ -100,7 +114,14 @@
             <h4>Send the report as an email</h4>
             <form action="/accidents/send" method="post">
               <label for="email">Email address:</label><br>
-              <input type="text" id="email" name="email" class="w-100"><br>
+              <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
+              <datalist id="organisations">
+                <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
+                <option value="info@mysite.com">FF</option>
+                <option value="info@twc2.org.sg">Transient Workers Count too</option>
+                <option value="nurezlia@home.org.sg">HOME</option>
+                <option value="info@healthserve.org.sg">Health Serve</option>
+              </datalist><br>
               <input type="hidden" name="accident_id" value="<%= accident.id %>">
               <%= button_to "Send Email", accidents_send_path(@accident), class: 'btn btn-success mt-2' %>
             </form>
@@ -118,7 +139,14 @@
       <h4>Send IPA as email</h4>
       <form action="/users/send" method="post" id="ipa">
         <label for="email">Email address:</label><br>
-        <input type="text" id="email" name="email" class="w-100"><br>
+        <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
+        <datalist id="organisations">
+          <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
+          <option value="info@mysite.com">FF</option>
+          <option value="info@twc2.org.sg">Transient Workers Count too</option>
+          <option value="nurezlia@home.org.sg">HOME</option>
+          <option value="info@healthserve.org.sg">Health Serve</option>
+        </datalist><br>
         <button type="submit" form="ipa" value="Submit" class="btn btn-success mt-2">Submit</button>
       </form>
       <% end %>

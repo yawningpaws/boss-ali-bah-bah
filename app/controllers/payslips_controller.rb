@@ -40,7 +40,6 @@ class PayslipsController < ApplicationController
   def send_payslip
     @user = current_user
     @email = params.permit(:email)[:email]
-    binding.pry
     @payslip = Payslip.find(params.permit(:payslip_id)[:payslip_id])
     if @email.match(/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
       UserMailer.with(user: @user, payslip: @payslip, email: @email).send_payslip.deliver_now
