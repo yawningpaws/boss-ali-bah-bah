@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+
+<body>
+  <h2>IPA of <%= @user.name %></h2>
+  <%= cl_image_tag @user.ipa_photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
+</body>
+
+</html>

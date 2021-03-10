@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+
+<body>
+  <h2>Payslip for <%= @user.name %> <%= Date::MONTHNAMES[@payslip.month] %> <%= @payslip.year %></h2>
+  <p>Amount: <%= @payslip.amount  %></p>
+  <p>Paid by: <%= @payslip.payment_method %></p>
+  <% @payslip.photos.each do |photo| %>
+  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
+  <% end %>
+</body>
+
+</html>
