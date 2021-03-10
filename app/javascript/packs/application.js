@@ -46,3 +46,17 @@ document.addEventListener('turbo:load', () => {
   initServiceworker();
   initMapbox();
 });
+
+document.addEventListener('turbo:submit-start', () => {
+  const spinner = document.querySelector('#spinner');
+  spinner.style.display = 'flex';
+});
+document.addEventListener('turbo:load', () => {
+  const spinner = document.querySelector('#spinner');
+  spinner.style.display = 'none';
+});
+
+document.addEventListener('turbo:before-fetch-response', () => {
+  const spinner = document.querySelector('#spinner');
+  spinner.style.display = 'none';
+});
