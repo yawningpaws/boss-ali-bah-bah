@@ -51,3 +51,8 @@ document.addEventListener('turbo:load', () => {
   const spinner = document.querySelector('#spinner');
   spinner.style.display = 'none';
 });
+
+document.addEventListener('turbo:before-fetch-response', () => {
+  const spinner = document.querySelector('#spinner');
+  spinner.style.display = 'none';
+});
