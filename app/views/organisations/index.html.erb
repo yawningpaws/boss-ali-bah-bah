@@ -1,14 +1,47 @@
-<div class="container">
-  <div id="map" class = "mt-5" style="width: 100%; height: 300px;"data-markers="<%= @markers.to_json %>"data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
+ <div class="container mt-3">
+   <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">NGO Locations</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">FAQs</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><div class="main container scrollable">
+      <div id="map" class = "mt-3" style="width: 100%; height: 300px;"data-markers="<%= @markers.to_json %>"data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
+      <div class="card mt-3">
+        <div class="card-header text-white">
+          NGO Locations
+        </div>
 
+        <ul class="list-group list-group-flush listings" data-organisations="<%= @organisations.to_json %>">
+        </ul>
+      </div>
 
-  <div class="dropdown mt-5">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown button
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" data-organisations="<%= @organisations.to_json %>">
     </div>
   </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <%= render 'organisations/faq' %>
+    <ul class="mt-3">
+      <li id="interesting-section">When am I entitled to overtime pay?</li>
+      <li> How much should I expect to receive each month?</li>
+      <li>  What should I do if my boss wants to deport me?</li>
+      <li>    Is it okay for my boss to safekeep my salary until the end of the year?
+      </li>
+      <li>   Is it okay for my boss to safekeep my salary until the end of the year?</li>
+      <li>     How much should I be paid if I work on my rest day?
+      </li>
+      <li>   What should I do if I am not given MC?</li>
+      <li> Must my boss pay me when I am on MC?</li>
+      <li>   My boss said that there is no work so he is not paying me</li>
+    </ul>
+
+
+
+
+  </div>
+</div>
 </div>
 

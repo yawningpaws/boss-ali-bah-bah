@@ -12,4 +12,8 @@ class OrganisationsController < ApplicationController
       }
     end
   end
+
+  def faq
+    render "faq"
+  end
 end
