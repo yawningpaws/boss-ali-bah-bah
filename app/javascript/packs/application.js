@@ -37,6 +37,7 @@ import "controllers";
 import { initServiceworker } from '../plugins/register_serviceworker';
 
 document.addEventListener('turbo:load', () => {
+  console.log('fired load!');
   // Call your functions here, e.g:
   // initSelect2();
   initFlatpickr();
@@ -45,18 +46,38 @@ document.addEventListener('turbo:load', () => {
   initTooltip();
   initServiceworker();
   initMapbox();
+  const spinner = document.querySelector('.spinner');
+  spinner.style.display = 'none';
 });
 
 document.addEventListener('turbo:submit-start', () => {
-  const spinner = document.querySelector('#spinner');
+  const spinner = document.querySelector('.spinner');
+  console.log('definitely working!');
   spinner.style.display = 'flex';
-});
-document.addEventListener('turbo:load', () => {
-  const spinner = document.querySelector('#spinner');
-  spinner.style.display = 'none';
 });
 
 document.addEventListener('turbo:before-fetch-response', () => {
-  const spinner = document.querySelector('#spinner');
-  spinner.style.display = 'none';
+  console.log('fired fetch response!');
 });
+
+
+document.addEventListener('turbo:submit-end', () => {
+  console.log('fired submit end!');
+  document.querySelectorAll('.spinner').forEach((el => el.style.display = 'none' ));
+});
+
+document.addEventListener('turbo:before-cache', () => {
+
+  console.log('fired before cache!');
+});
+
+
+document.addEventListener('turbo:before-render', () => {
+  console.log('fired before render!');
+});
+
+document.addEventListener('turbo:before-stream-render', () => {
+  console.log('fired before stream render!');
+});
+
+
