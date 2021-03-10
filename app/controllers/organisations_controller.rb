@@ -1,6 +1,7 @@
 class OrganisationsController < ApplicationController
   def index
     @organisations = Organisation.all
+    @articles = Article.all
     # the `geocoded` scope filters only flats with coordinates (latitude & longitude)
     @markers = @organisations.geocoded.map do |organisation|
       {

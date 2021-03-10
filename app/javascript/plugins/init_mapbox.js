@@ -1,7 +1,6 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as turf from '@turf/turf';
-
   const buildMap = (mapElement) => {
     //currentPosition();
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
@@ -12,7 +11,6 @@ import * as turf from '@turf/turf';
       zoom: 12
     });
   };
-
   const addMarkersToMap = (map, markers) => {
     markers.forEach((marker) => {
       new mapboxgl.Marker()
@@ -20,72 +18,56 @@ import * as turf from '@turf/turf';
       .addTo(map);
     });
   };
-
   const fitMapToMarkers = (map, markers) => {
     const bounds = new mapboxgl.LngLatBounds();
     bounds.extend([ currentP.lng, currentP.lat ]);
     map.fitBounds(bounds, { padding: 70, maxZoom: 15 });
   };
-
-  // const currentPosition = (map) => {
-  //   navigator.geolocation.getCurrentPosition((data) => {
-  //     const elem = document.createElement('div');
-  //     elem.className = 'marker';
-
-
-  //     new mapboxgl.Marker(elem)
-  //     .setLngLat([ data.coords.longitude, data.coords.latitude ])
-  //     .addTo(map);
-  //     const bounds = new mapboxgl.LngLatBounds();
-  //     bounds.extend([ data.coords.longitude, data.coords.latitude ]);
-  //     map.fitBounds(bounds, { padding: 70, maxZoom: 14 });
-  //   });
-  // };
-
-  const dropdownPopulate = new Promise((resolve, reject) => {
-    const newElement = document.createElement('div');
-    newElement.innerHTML = "<div class=\"spinner-border\" role=\"status\"> <span class=\"sr-only\">Loading...</span> </div>"
-    document.querySelector('.listings').appendChild(newElement);
-
-
-    const ddMenu = document.querySelector('.listings');
-    const organisations = JSON.parse(ddMenu.dataset.organisations);
-    organisations.forEach(organisation => {
-      navigator.geolocation.getCurrentPosition((data) => {
-        const from = turf.point([ data.coords.longitude, data.coords.latitude]);
-        const to = turf.point([organisation.longitude, organisation.latitude]);
-        const options = {units: 'kilometers'};
-        const distance = turf.distance(from, to, options);
-
-        // ddMenu.insertAdjacentHTML('beforeend', `<li class="list-group-item"><a class="listing" data-longitude="${organisation.longitude}" data-latitude="${organisation.latitude}"> <strong>${organisation.name}</strong><div class="font-size-add">📍${organisation.address}</div><div class="font-size-add">📞${organisation.phone_number}</div><div class="font-size"> ${ distance.toFixed(2)}km away</div></a>`);
-
-        ddMenu.innerHTML += `<li class="list-group-item"><a class="listing" data-longitude="${organisation.longitude}" data-latitude="${organisation.latitude}"> <strong>${organisation.name}</strong><div class="font-size-add">📍${organisation.address}</div><div class="font-size-add">📞${organisation.phone_number}</div><div class="font-size"> ${ distance.toFixed(2)}km away</div></a>`
-      });
+  const currentPosition = (map) => {
+    navigator.geolocation.getCurrentPosition((data) => {
+      const elem = document.createElement('div');
+      elem.className = 'marker';
+      new mapboxgl.Marker(elem)
+      .setLngLat([ data.coords.longitude, data.coords.latitude ])
+      .addTo(map);
+      const bounds = new mapboxgl.LngLatBounds();
+      bounds.extend([ data.coords.longitude, data.coords.latitude ]);
+      map.fitBounds(bounds, { padding: 70, maxZoom: 14 });
     });
-    // delete the rendering of getting your data
-    // newElement.remove()
-    resolve([newElement, ddMenu])
-  })
-
-
-
-
-
-
-  const flyToMap = (map, elementCollection) => {
-    debugger
-    document.querySelectorAll('.listing').forEach(item => {
-
+  };
+  const dropdownPopulate = new Promise((resolve, reject) => {
+      const newElement = document.createElement('div');
+      newElement.innerHTML = "<div class=\"spinner-border\" role=\"status\"> <span class=\"sr-only\">Loading...</span> </div>"
+      const listings = document.querySelector('.listings');
+      if (listings){
+      listings.appendChild(newElement);
+      const ddMenu = document.querySelector('.listings');
+      const organisations = JSON.parse(ddMenu.dataset.organisations);
+      organisations.forEach(organisation => {
+        console.log(organisation);
+        navigator.geolocation.getCurrentPosition((data) => {
+          const from = turf.point([ data.coords.longitude, data.coords.latitude]);
+          const to = turf.point([organisation.longitude, organisation.latitude]);
+          const options = {units: 'kilometers'};
+          const distance = turf.distance(from, to, options);
+          // ddMenu.insertAdjacentHTML('beforeend', `<li class="list-group-item"><a class="listing" data-longitude="${organisation.longitude}" data-latitude="${organisation.latitude}"> <strong>${organisation.name}</strong><div class="font-size-add">📍${organisation.address}</div><div class="font-size-add">📞${organisation.phone_number}</div><div class="font-size"> ${ distance.toFixed(2)}km away</div></a>`);
+          ddMenu.innerHTML += `<li class="list-group-item" data-longitude="${organisation.longitude}" data-latitude="${organisation.latitude}"><a class="listing"> <strong>${organisation.name}</strong><div class="font-size-add">📍${organisation.address}</div><div class="font-size-add">📞${organisation.phone_number}</div><div class="font-size"> ${ distance.toFixed(2)}km away</div></a>`
+        });
+      });
+      resolve(newElement)
+      // delete the rendering of getting your data
+      // newElement.remove()
+    }})
+  const flyToMap = (map) => {
+    document.querySelectorAll('.list-group-item').forEach(item => {
       item.addEventListener("click", (event) => {
-        console.log('event attached successfully')
         map.flyTo({
-          center: [item.dataset.longitude, item.dataset.latitude],
+          center: [parseFloat(item.dataset.longitude), parseFloat(item.dataset.latitude)],
           zoom: 15
         })
       })
     });
   };
-
 const initMapbox = () => {
   const mapElement = document.getElementById('map');
   if (mapElement) {
@@ -98,14 +80,12 @@ const initMapbox = () => {
         trackUserLocation: true
       })
     );
-
     const markers = JSON.parse(mapElement.dataset.markers);
     addMarkersToMap(map, markers);
-    // currentPosition(map);
+    currentPosition(map);
     // fitMapToMarkers(map);
     markers.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
-
   // Create a HTML element for your custom marker
   const element = document.createElement('div');
   element.className = 'marker';
@@ -113,32 +93,27 @@ const initMapbox = () => {
   element.style.backgroundSize = 'contain';
   element.style.width = '25px';
   element.style.height = '25px';
-
     // Pass the element as an argument to the new marker
     new mapboxgl.Marker(element)
     .setLngLat([marker.lng, marker.lat])
     .setPopup(popup)
     .addTo(map);
   });
-
-
-
     dropdownPopulate
-    .then( spinnerAndDDMenu => {
-      spinnerAndDDMenu[0].remove();
-      window.requestAnimationFrame( () => {
-        console.log('1= = am I even here!');
-        window.requestAnimationFrame( () => {
-            console.log('2 == am I even here!');
-            flyToMap(map, spinnerAndDDMenu[1])
+    .then( spinner => {
+      spinner.remove();
+      })
+    console.log('left the promise');
+    const listingsContainer = document.querySelector('.list-group.list-group-flush.listings')
+    const config = { attributes: true, childList: true, subtree: true }
+    const observer = new MutationObserver((mutationsList) => {
+        mutationsList.forEach((mutation) => {
+          if (mutation.type === 'childList') {
+            flyToMap(map);
+          }
         })
       })
-    })
-
-
-
+    observer.observe(listingsContainer, config)
+    }
   }
-};
-
-
-export { initMapbox};
+export { initMapbox };

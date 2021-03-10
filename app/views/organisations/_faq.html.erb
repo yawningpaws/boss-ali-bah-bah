@@ -1,2 +1,23 @@
-<h4 id= "interesting-section">Info</h4>
-<li><a class="home" href="#interesting-section">Section</a></li>
+ <div class="container scrollable my-3 ">
+   <div class="accordion" id="accordionExample">
+    <% @articles.each do |article| %>
+    <div class="card">
+      <div class="card-header" id="heading<%= article.id %>">
+        <h5 class="mb-0">
+          <button class="btn btn-link text-white collapsed" type="button" data-toggle="collapse" data-target="#collapse<%= article.id %>" aria-expanded="true" aria-controls="collapse<%= article.id %>">
+            <%= article.title %>
+          </button>
+        </h5>
+      </div>
+
+      <div id="collapse<%= article.id %>" class="collapse" aria-labelledby="heading<%= article.id %>" data-parent="#accordionExample">
+        <div class="card-body">
+         <%= article.content %>
+        </div>
+      </div>
+    </div>
+
+    <% end %>
+  </div>
+
+
