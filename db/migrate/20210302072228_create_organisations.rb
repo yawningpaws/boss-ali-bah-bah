@@ -8,8 +8,8 @@ class CreateOrganisations < ActiveRecord::Migration[6.1]
       t.string :phone_number
       t.string :email_address
       t.string :website
-      t.float :latitude
-      t.float :longitude
+      t.float :lat
+      t.float :lng
 
       t.timestamps
     end
