@@ -33,7 +33,7 @@ import { initFlatpickr } from '../plugins/init_flatpickr';
 //import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
 import { initTooltip } from '../plugins/init_tooltip';
 import "controllers";
-
+import { initServiceworker } from '../plugins/register_serviceworker';
 
 document.addEventListener('turbo:load', () => {
   // Call your functions here, e.g:
@@ -42,5 +42,6 @@ document.addEventListener('turbo:load', () => {
   //initWebrtcPhoto();
   //initCamera();
   initTooltip();
+  initServiceworker();
 });
 
