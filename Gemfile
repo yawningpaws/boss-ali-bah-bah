@@ -35,7 +35,9 @@ gem 'devise'
 gem 'cloudinary', '~> 1.16.0'
 gem 'serviceworker-rails'
 gem "simple_calendar", "~> 2.4"
+gem 'geocoder'
 gem 'noticed'
+
 
 group :development, :test do
   gem 'pry-byebug'

@@ -24,5 +24,7 @@ Rails.application.routes.draw do
   get 'workdays/on_leave', to: 'workdays#on_leave'
   get 'workdays/on_leave/:id', to: 'workdays#on_leave'
   get 'workdays/working/:id', to: 'workdays#working'
+  get 'organisation', to: 'organisations#index'
+  get 'faq', to: 'organisations#faq'
   resources :payslips, only: [:new, :create, :edit, :update]
 end
