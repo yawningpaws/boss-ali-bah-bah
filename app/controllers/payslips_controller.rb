@@ -38,6 +38,17 @@ class PayslipsController < ApplicationController
     end
   end
 
+  def send_payslip
+    @user = current_user
+    @email = params.permit(:email)[:email]
+    @payslip = Payslip.find(params.permit(:payslip_id)[:payslip_id])
+    if @email.match(/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+      UserMailer.with(user: @user, payslip: @payslip, email: @email).send_payslip.deliver_now
+    else
+      flash.alert = "That is not an appropriate email"
+    end
+  end
+
   private
 
   def payslip_params

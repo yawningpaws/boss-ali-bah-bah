@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   get '/accidents/confirm', to: 'accidents#confirm'
   post '/accidents/send', to: 'accidents#send_accident'
+  post '/workdays/send', to: 'workdays#send_worklog'
+  post '/payslips/send', to: 'payslips#send_payslip'
+  post '/users/send', to: 'users#send_ipa'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   resources :accidents do
     member do
@@ -27,4 +30,5 @@ Rails.application.routes.draw do
   get 'organisation', to: 'organisations#index'
   get 'faq', to: 'organisations#faq'
   resources :payslips, only: [:new, :create, :edit, :update]
+  get '/files', to: 'pages#files'
 end

@@ -38,6 +38,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def send_ipa
+    @user = current_user
+    @email = params.permit(:email)[:email]
+    if @email.match(/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i)
+      UserMailer.with(user: @user, email: @email).send_ipa.deliver_now
+    else
+      flash.alert = "Not an appropriate email"
+    end
+  end
+
   private
 
   def strong_params
