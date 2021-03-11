@@ -37,7 +37,6 @@ import "controllers";
 import { initServiceworker } from '../plugins/register_serviceworker';
 
 document.addEventListener('turbo:load', () => {
-  console.log('fired load!');
   const spinner = document.querySelector('.spinner');
   spinner.style.display = 'none';
   // Call your functions here, e.g:
@@ -57,7 +56,6 @@ document.addEventListener('turbo:submit-start', () => {
 
 
 document.addEventListener('turbo:submit-end', () => {
-  console.log('fired submit end!');
   const spinner = document.querySelector('.spinner');
   spinner.style.display = 'none';
 });
