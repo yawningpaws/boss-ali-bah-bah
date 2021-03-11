@@ -37,6 +37,8 @@ import "controllers";
 import { initServiceworker } from '../plugins/register_serviceworker';
 
 document.addEventListener('turbo:load', () => {
+  const spinner = document.querySelector('.spinner');
+  spinner.style.display = 'none';
   // Call your functions here, e.g:
   // initSelect2();
   initFlatpickr();
@@ -48,15 +50,12 @@ document.addEventListener('turbo:load', () => {
 });
 
 document.addEventListener('turbo:submit-start', () => {
-  const spinner = document.querySelector('#spinner');
+  const spinner = document.querySelector('.spinner');
   spinner.style.display = 'flex';
 });
-document.addEventListener('turbo:load', () => {
-  const spinner = document.querySelector('#spinner');
-  spinner.style.display = 'none';
-});
 
-document.addEventListener('turbo:before-fetch-response', () => {
-  const spinner = document.querySelector('#spinner');
+
+document.addEventListener('turbo:submit-end', () => {
+  const spinner = document.querySelector('.spinner');
   spinner.style.display = 'none';
 });
