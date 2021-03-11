@@ -11,7 +11,7 @@
   </div>
 </div>
 <%= simple_form_for @accident do |f| %>
-<%= f.input :paid_by_employer, as: :select %>
+<%= f.input :paid_by_employer, as: :select, label: 'Did boss pay?' %>
 <%= f.input :mc_days %>
 <%= f.input :photos, as: :file, input_html: { multiple: true } %>
 <%= f.submit 'Finish', class: 'btn btn-primary btn-block mb-3' %>

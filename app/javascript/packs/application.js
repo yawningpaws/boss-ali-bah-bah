@@ -31,6 +31,7 @@ import { initFlatpickr } from '../plugins/init_flatpickr';
 import { initTooltip } from '../plugins/init_tooltip';
 import { initMapbox } from '../plugins/init_mapbox';
 import { initServiceworker } from '../plugins/register_serviceworker';
+import { accidentInput } from '../plugins/init_accident_input';
 
 document.addEventListener('turbo:load', () => {
   const spinner = document.querySelector('.spinner');
@@ -39,6 +40,7 @@ document.addEventListener('turbo:load', () => {
   initTooltip();
   initServiceworker();
   initMapbox();
+  accidentInput();
 });
 
 document.addEventListener('turbo:submit-start', () => {
