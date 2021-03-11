@@ -1,0 +1,60 @@
+#carouselLanding {
+  background-color: white;
+  margin: 0 auto;
+  width: 80vw;
+  height: 55vh;
+  position: relative;
+
+  .carousel-indicators > li {
+    background-color: grey;
+  }
+
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-image: none;
+  }
+
+  .carousel-control-next-icon:after
+  {
+    content: '>';
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: grey;
+  }
+
+  .carousel-control-prev-icon:after {
+    content: '<';
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: grey;
+  }
+
+  .carousel-inner {
+    width: 100%;
+    // min-height: 100%;
+
+
+    .carousel-item {
+      max-height: 100%;
+
+
+      img {
+        max-width: 80%;
+        max-height: 100%;
+        display: flex;
+        margin: 70px auto;
+      }
+
+      .carousel-caption {
+        position: absolute;
+        top: 0px;
+        color: black;
+      }
+    }
+  }
+}
+
+#logo {
+  display: flex;
+  margin: 20px auto;
+}

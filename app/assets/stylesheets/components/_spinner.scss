@@ -1,0 +1,13 @@
+.spinner {
+  display: none;
+  width:100vw;
+  height:90vh;
+  z-index:1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}

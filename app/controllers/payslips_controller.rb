@@ -6,6 +6,7 @@ class PayslipsController < ApplicationController
   def create
     @payslip = Payslip.new(payslip_params)
     @payslip.user = current_user
+    payslip_params[:user_id] = current_user.id
 
     respond_to do |format|
       if @payslip.save
