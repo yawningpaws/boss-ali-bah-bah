@@ -2,16 +2,20 @@
   "background_color": "white",
   "description": "An app to help migrant workers in Singapore",
   "display": "fullscreen",
+  "theme_color": "white",
   "name": "boss ali bah bah?",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
-    <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
-    <% files.each_with_index do |file, index| %>
-      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
-      {
-        "src": "<%= image_path "icons/#{file}" %>",
-        "sizes": "<%= match && match[:size] %>",
-        "type": "image/png"
-      }<%= "," unless (files.size - 1) == index %>
-    <% end %>
+    {
+      "src": "<%= image_path 'icons/android-icon-192x192.png' %>",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "<%= image_path 'icons/android-icon-512x512.png' %>",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
   ]
 }

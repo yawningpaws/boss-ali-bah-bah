@@ -23,27 +23,41 @@ import "@hotwired/turbo-rails"
 
 // External imports
 import "bootstrap";
+import "bootstrap/dist/js/bootstrap.bundle";
 
-// Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
+// Internal imports
+import "controllers";
 import { initFlatpickr } from '../plugins/init_flatpickr';
-//import { initCamera} from '../plugins/init_camera.js';
-
-//import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
 import { initTooltip } from '../plugins/init_tooltip';
 import { initMapbox } from '../plugins/init_mapbox';
+<<<<<<< HEAD
 import "controllers";
 import { toggleCollapse } from '../plugins/init_toggle';
 
 
+import { initServiceworker } from '../plugins/register_serviceworker';
+import { accidentInput } from '../plugins/init_accident_input';
+
+
 document.addEventListener('turbo:load', () => {
-  // Call your functions here, e.g:
-  // initSelect2();
+  const spinner = document.querySelector('.spinner');
+  spinner.style.display = 'none';
   initFlatpickr();
-  //initWebrtcPhoto();
-  //initCamera();
   initTooltip();
   // console.log('about to fire mapbox');
   initMapbox();
   toggleCollapse();
+  initServiceworker();
+  initMapbox();
+  accidentInput();
+});
+
+document.addEventListener('turbo:submit-start', () => {
+  const spinner = document.querySelector('.spinner');
+  spinner.style.display = 'flex';
+});
+
+document.addEventListener('turbo:submit-end', () => {
+  const spinner = document.querySelector('.spinner');
+  spinner.style.display = 'none';
 });

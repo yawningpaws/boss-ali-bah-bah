@@ -13,4 +13,11 @@ class PagesController < ApplicationController
     @payslips = Payslip.where(user: current_user)
     @basic_salary = current_user.basic_salary
   end
+
+  def files
+    @payslips = Payslip.where(user: current_user).order("year DESC", "month ASC")
+    @accidents = Accident.where(user: current_user).sort_by(&:date).reverse
+    @user = current_user
+    @workdays = Workday.where(user: current_user).group_by { |m| m.date.beginning_of_month }
+  end
 end

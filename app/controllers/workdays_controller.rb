@@ -1,3 +1,5 @@
+require 'csv'
+
 class WorkdaysController < ApplicationController
   def new
     @workday = Workday.new
@@ -72,7 +74,30 @@ class WorkdaysController < ApplicationController
     @workday = Workday.find(params[:id])
   end
 
+  def send_worklog
+    @workdays = Workday.where(user: current_user).group_by { |m| m.date.beginning_of_month }
+    required = @workdays[params.permit(:log_key)[:log_key].to_date]
+    attributes = %w[date start_time end_time on_rest on_mc]
+    data = CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      required.each do |item|
+        if item.on_mc || item.on_rest
+          item.start_time = ""
+          item.end_time = ""
+        end
+        csv << attributes.map { |attr| item.send(attr) }
+      end
+    end
+    UserMailer.with(user: current_user, date: params.permit(:log_key)[:log_key]).send_worklog(params.permit(:email)[:email], data).deliver_now
+  end
+
   private
+
+  def send_csv(email, csv)
+    attachments['my_file_name.csv'] = {mime_type: 'text/csv', content: csv}
+    mail(to: email, subject: 'My subject', body: 'My body.')
+  end
 
   def workday_params
     params.require(:workday).permit(:date, :start_time, :end_time, :on_rest, :on_mc)
@@ -99,4 +124,5 @@ class WorkdaysController < ApplicationController
     attributes[:on_rest] = false
     attributes
   end
+
 end

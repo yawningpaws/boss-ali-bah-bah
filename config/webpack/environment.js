@@ -1,4 +1,7 @@
-const { environment } = require('@rails/webpacker')
+const { config, environment } = require('@rails/webpacker')
+const { resolve } = require('path');
+const WebpackerPwa = require('webpacker-pwa');
+new WebpackerPwa(config, environment)
 
 const webpack = require('webpack');
 
