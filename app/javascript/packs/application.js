@@ -25,25 +25,17 @@ import "@hotwired/turbo-rails"
 import "bootstrap";
 import "bootstrap/dist/js/bootstrap.bundle";
 
-// Internal imports, e.g:
-// import { initSelect2 } from '../components/init_select2';
+// Internal imports
+import "controllers";
 import { initFlatpickr } from '../plugins/init_flatpickr';
-//import { initCamera} from '../plugins/init_camera.js';
-
-//import { initWebrtcPhoto } from '../plugins/init_webrtc_photo.js';
 import { initTooltip } from '../plugins/init_tooltip';
 import { initMapbox } from '../plugins/init_mapbox';
-import "controllers";
 import { initServiceworker } from '../plugins/register_serviceworker';
 
 document.addEventListener('turbo:load', () => {
   const spinner = document.querySelector('.spinner');
   spinner.style.display = 'none';
-  // Call your functions here, e.g:
-  // initSelect2();
   initFlatpickr();
-  //initWebrtcPhoto();
-  //initCamera();
   initTooltip();
   initServiceworker();
   initMapbox();
@@ -53,7 +45,6 @@ document.addEventListener('turbo:submit-start', () => {
   const spinner = document.querySelector('.spinner');
   spinner.style.display = 'flex';
 });
-
 
 document.addEventListener('turbo:submit-end', () => {
   const spinner = document.querySelector('.spinner');

@@ -1,6 +1,40 @@
-<div class="center-landing">
-  <%= image_tag "boss-abb-logo.png", height: 200, width: 200, crop: :fill , class: "mb-3"%>
-
- <%= link_to "Login", new_user_session_path, class: 'btn btn-block btn-blue my-3 text-white', data: { turbo: false }  %>
- <%= link_to "Sign up", new_user_registration_path, class: 'btn btn-block btn-blue my-3 text-white', data: { turbo: false }  %>
+<div class="container my-4">
+    <%= image_tag "boss-abb-logo.png", height: 80, width: 80, crop: :fill, id: 'logo' %>
+  <div id="carouselLanding" class="carousel slide mb-4" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <%= image_tag "landing-contract.svg" %>
+        <div class="carousel-caption">
+          <h6>Learn about your employment rights</h6>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag "landing-documents.svg" %>
+        <div class="carousel-caption">
+          <h6>Keep important documents simply and quickly</h6>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <%= image_tag "landing-sign.svg" %>
+        <div class="carousel-caption">
+          <h6>Seek help easily</h6>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#carouselLanding" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselLanding" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-block btn-blue mt-4 text-white', data: { turbo: false }  %>
+  <%= link_to "Log In", new_user_session_path, class: 'btn btn-block btn-outline-primary mt-2 mb-4 text-primary', data: { turbo: false }  %>
 </div>
