@@ -7,29 +7,29 @@
 
 <body>
   <h2>Accident info for <%= @user.name %></h2>
-  <p>Date:<br><%= @accident.date %></p>
-  <p>Time:<br><%= @accident.time.strftime("%k:%M")%></p>
-  <p>Description:<br><%= @accident.description%></p>
-  <p>Part injured:<br><%= @accident.injured_part%></p>
-  <p>Place of Treatment:<br><%= @accident.medical_facility%><br>
+  <p><strong>Date:</strong><br><%= @accident.date.strftime("%d %b %Y") %></p>
+  <p><strong>Time:</strong><br><%= @accident.time.strftime("%k:%M")%></p>
+  <p><strong>Description:</strong><br><%= @accident.description%></p>
+  <p><strong>Part injured:</strong><br><%= @accident.injured_part%></p>
+  <p><strong>Place of Treatment:</strong><br><%= @accident.medical_facility%><br>
     <% if @accident.medical_facility == 'None' || nil %>
-      <small style="color:red;">*Employer should have sought proper medical care*</small>
+    <small style="color:red;">*Employer should have sought proper medical care*</small>
     <% end %>
   </p>
   <p>
-    Treatment was paid by employer:<br><%= @accident.paid_by_employer ? 'Yes' : 'No' %> <br>
+    <strong>Treatment was paid by employer:</strong><br><%= @accident.paid_by_employer ? 'Yes' : 'No' %> <br>
     <% unless @accident.paid_by_employer %>
-      <small style="color:red;">*Employer should have paid*</small>
+    <small style="color:red;">*Employer should have paid*</small>
     <% end %>
   </p>
   <p>
-    No. of MC days:<br><%= @accident.mc_days %><br>
+    <strong>No. of MC days:<br><%= @accident.mc_days %><br>
       <% if @accident.mc_days == 0 || nil %>
-    <small style="color:red;">*MC should have been given*</small>
-    <% end %>
+      <small style="color:red;">*MC should have been given*</small>
+      <% end %>
   </p>
   <% @accident.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
+  <%= cl_image_tag photo.key, crop: :fit, class: 'w-75' %>
   <% end %>
 </body>
 
