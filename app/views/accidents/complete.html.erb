@@ -1,25 +1,25 @@
 <%= turbo_frame_tag :accident do %>
 <h2>Review your information</h2>
-<p><strong>Date:</strong><br><%= @accident.date %></p>
+<p><strong>Date:</strong><br><%= @accident.date.strftime("%d %b %Y") %></p>
 <p><strong>Time:</strong><br><%= @accident.time.strftime("%k:%M")%></p>
 <p><strong>Description:</strong><br><%= @accident.description%></p>
 <p><strong>Part injured:</strong><br><%= @accident.injured_part%></p>
 <p><strong>Place of Treatment:</strong><br><%= @accident.medical_facility%><br>
-      <% if @accident.medical_facility == 'None' || nil %>
-      <small class="text-danger">*Employer should have sought proper medical care*</small>
-      <% end %>
+  <% if @accident.medical_facility == 'None' || nil %>
+  <small class="text-danger">*Employer should have sought proper medical care*</small>
+  <% end %>
 </p>
 <p>
   <strong>Treatment was paid by boss:</strong><br><%= @accident.paid_by_employer ? 'Yes' : 'No' %> <br>
-      <% unless @accident.paid_by_employer %>
-      <small class="text-danger">*Employer should have paid*</small>
-      <% end %>
+  <% unless @accident.paid_by_employer %>
+  <small class="text-danger">*Employer should have paid*</small>
+  <% end %>
 </p>
 <p>
   <strong>No. of MC days:</strong><br><%= @accident.mc_days %><br>
-      <% if @accident.mc_days == 0 || nil %>
-      <small class="text-danger">*MC should have been given*</small>
-      <% end %>
+  <% if @accident.mc_days == 0 || nil %>
+  <small class="text-danger">*MC should have been given*</small>
+  <% end %>
 </p>
 <% @accident.photos.each do |photo| %>
 <%= cl_image_tag photo.key, crop: :thumb, class: 'w-50' %>
