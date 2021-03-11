@@ -10,4 +10,12 @@ class User < ApplicationRecord
   has_many :notifications, as: :recipient
 
   validates :phone_number, presence: true, uniqueness: true, format: { with: /\A[689]\d{7}\z/ }
+
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
 end
