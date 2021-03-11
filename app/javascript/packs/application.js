@@ -35,6 +35,7 @@ import { initTooltip } from '../plugins/init_tooltip';
 import { initMapbox } from '../plugins/init_mapbox';
 import "controllers";
 import { initServiceworker } from '../plugins/register_serviceworker';
+import { accidentInput } from '../plugins/init_accident_input';
 
 document.addEventListener('turbo:load', () => {
   // Call your functions here, e.g:
@@ -45,4 +46,5 @@ document.addEventListener('turbo:load', () => {
   initTooltip();
   initServiceworker();
   initMapbox();
+  accidentInput();
 });
