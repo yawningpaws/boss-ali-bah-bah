@@ -1,6 +1,7 @@
 class AccidentsController < ApplicationController
   def new
     # check if current_user last accident is 10 mins ago
+    binding.pry
     if session[:accident].nil?
       @accident = Accident.new
     else
