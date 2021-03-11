@@ -3,5 +3,3 @@ class RegistrationsController < Devise::RegistrationsController
     onboarding_path(current_user.id)
   end
 end
-
-
