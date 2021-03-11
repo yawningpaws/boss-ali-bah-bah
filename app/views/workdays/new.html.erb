@@ -1,4 +1,6 @@
 <div class="container my-3" id='workday-form-dates' data-completed-dates='<%= @workdays_dates.to_json %>'>
+  <p style="text-align: center;">Keep track of your work hours to calculate your salary. This is important if you need to make a salary claim.</p>
+  <h5 class="mb-3" style="text-align: center;">Start protecting yourself today.</h5>
   <%= turbo_frame_tag 'workday_form' do %>
     <%= simple_form_for(@workday, data: { turbo_frame: '_top' }) do |f| %>
       <%= f.input :date, as: :string, type: :text %>
