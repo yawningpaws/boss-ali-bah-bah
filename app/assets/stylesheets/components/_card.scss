@@ -67,10 +67,13 @@
 }
 .carousel-inner{
   width:100%;
-  max-height: 200px !important;
+  // max-height: 200px !important;
 }
 
-.btn-green{background-color:#2ab59b;color: #black;}
+.btn-green{
+  background-color:#2ab59b;
+  color: #black;
+}
 
 .round{
   border-radius: 25px;
