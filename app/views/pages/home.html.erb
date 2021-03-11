@@ -1,4 +1,5 @@
 <div class="container ">
+  <% if @workday_checkedin.nil? %>
   <div class="d-flex parent">
     <div class="card-product mb-3 mt-3 round square">
       <div class="square border-dark round">
@@ -6,20 +7,38 @@
         <h1 class= "text-center" style="line-height: 80px"><%=  Date.today.day%></h1>
       </div>
     </div>
-    <div class="child">
-      <% if @workday_checkedin.nil? %>
-      <span class="badge badge-danger">!</span>
-      <strong><u><%= link_to 'Please check in here', new_workday_path,class: "text-blue" %></u></strong>
-      <% elsif (@workday_checkedin.on_mc) %>
-      <p class= "text-blue text-center">Get well soon 🙏</p>
-      <% elsif (@workday_checkedin.on_rest) %>
-      <p class= "text-blue text-center">Enjoy your rest day 🤗 </p>
-      <% else %>
-      <p class= "text-blue text-center">You're good for today 👍 </p>
-      <% end %>
-<!--       <%= link_to "Section", "#{organisation_path}#interesting-section"%>
- -->    </div>
 
+    <div class="child" style="float:left;">
+      <span class="badge badge-danger badge-customize">!</span>
+      <strong><u><%= link_to 'Please check in here', new_workday_path,class: "text-blue", data: { turbo: 'false' } %></u></strong>
+    </div>
+  </div>
+  <% else %>
+    <div class="card-product mb-3 mt-3 ml-1 round square left">
+      <div class="square border-dark round">
+        <h5 class= "text-center text-white border-dark square" style="background-color:#262737"><%=  (Date::MONTHNAMES[Date.today.mon]).capitalize%></h5>
+        <h1 class= "text-center" style="line-height: 80px"><%=  Date.today.day%></h1>
+      </div>
+    </div>
+    <div class="mt-3 text-blue text-center container">
+      <% if @workday_checkedin.on_mc %>
+      <p class="move-down">Get well soon 🙏</p>
+        <strong><i class="fas fa-info-circle"></i>
+          <%= link_to organisation_path(anchor: "article#{@article.first.id}"), data: { turbo: false } do %><%= @article.first.title %><% end %>
+        </strong>
+      <% elsif @workday_checkedin.on_rest %>
+      <p class="move-down">Enjoy your rest day 🤗 </p>
+        <strong><i class="fas fa-info-circle"></i>
+          <%= link_to organisation_path(anchor: "article#{@article.first.id}"), data: { turbo: false } do %><%= @article.first.title %><% end %>
+          <!-- <a href="/organisation#article<%= @article.first.id %>"><%= @article.first.title %></a> -->
+        </strong>
+      <% else %>
+      <p class="move-down">You're good for today 👍 </p>
+        <strong><i class="fas fa-info-circle"></i>
+          <%= link_to organisation_path(anchor: "article#{@article.first.id}"), data: { turbo: false } do %><%= @article.first.title %><% end %>
+        </strong>
+        <% end %>
+      <% end %>
   </div>
 
 
