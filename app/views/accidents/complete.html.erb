@@ -1,32 +1,32 @@
 <%= turbo_frame_tag :accident do %>
 <h2>Review your information</h2>
-<p>Date:<br><%= @accident.date %></p>
-<p>Time:<br><%= @accident.time.strftime("%k:%M")%></p>
-<p>Description:<br><%= @accident.description%></p>
-<p>Part injured:<br><%= @accident.injured_part%></p>
-<p>Place of Treatment:<br><%= @accident.medical_facility%><br>
-  <% if @accident.medical_facility == 'None' || nil %>
-  <small class="text-danger">*Employer should have sought proper medical care*</small>
-  <% end %>
+<p><strong>Date:</strong><br><%= @accident.date %></p>
+<p><strong>Time:</strong><br><%= @accident.time.strftime("%k:%M")%></p>
+<p><strong>Description:</strong><br><%= @accident.description%></p>
+<p><strong>Part injured:</strong><br><%= @accident.injured_part%></p>
+<p><strong>Place of Treatment:</strong><br><%= @accident.medical_facility%><br>
+      <% if @accident.medical_facility == 'None' || nil %>
+      <small class="text-danger">*Employer should have sought proper medical care*</small>
+      <% end %>
 </p>
 <p>
-  Treatment was paid by employer:<br><%= @accident.paid_by_employer ? 'Yes' : 'No' %> <br>
-  <% unless @accident.paid_by_employer %>
-  <small class="text-danger">*Employer should have paid*</small>
-  <% end %>
+  <strong>Treatment was paid by boss:</strong><br><%= @accident.paid_by_employer ? 'Yes' : 'No' %> <br>
+      <% unless @accident.paid_by_employer %>
+      <small class="text-danger">*Employer should have paid*</small>
+      <% end %>
 </p>
 <p>
-  No. of MC days:<br><%= @accident.mc_days %><br>
-  <% if @accident.mc_days == 0 || nil %>
-  <small class="text-danger">*MC should have been given*</small>
-  <% end %>
+  <strong>No. of MC days:</strong><br><%= @accident.mc_days %><br>
+      <% if @accident.mc_days == 0 || nil %>
+      <small class="text-danger">*MC should have been given*</small>
+      <% end %>
 </p>
 <% @accident.photos.each do |photo| %>
-<%= cl_image_tag photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
+<%= cl_image_tag photo.key, crop: :thumb, class: 'w-50' %>
 <% end %>
 
 <%= turbo_frame_tag "email" do %>
-<div class="container py-3">
+<div class="container py-3 border rounded bg-white">
   <h4>Send the report as an email</h4>
   <form action="/accidents/send" method="post">
     <label for="email">Email address:</label><br>
