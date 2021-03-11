@@ -3,6 +3,7 @@ class PagesController < ApplicationController
     if !user_signed_in?
       redirect_to landing_path
     else
+      @article = Article.limit(1).order("RANDOM()")
       @workday_checkedin = Workday.where("user_id = ? and date = ? and start_time is not null", current_user.id,Date.today)[0]
     end
   end

@@ -33,6 +33,7 @@ import { initFlatpickr } from '../plugins/init_flatpickr';
 import { initTooltip } from '../plugins/init_tooltip';
 import { initMapbox } from '../plugins/init_mapbox';
 import "controllers";
+import { toggleCollapse } from '../plugins/init_toggle';
 
 
 document.addEventListener('turbo:load', () => {
@@ -42,5 +43,7 @@ document.addEventListener('turbo:load', () => {
   //initWebrtcPhoto();
   //initCamera();
   initTooltip();
+  // console.log('about to fire mapbox');
   initMapbox();
+  toggleCollapse();
 });

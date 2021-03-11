@@ -21,6 +21,14 @@
 
 }
 
+.move-down{
+  padding-top: 15px;
+}
+
+.btn-transparent{
+  background-color: transparent;
+  border: none;
+}
 .child-second{
  margin-top: 20px;
 }
@@ -29,17 +37,28 @@
   color:#262737;
 }
 
+.left{
+  float: left;
+}
 
 
-.badge {
+.badge-customize {
   position: absolute;
   padding: 5px 10px;
   border-radius: 50%;
   color: white;
   left:-2px;
   top:10px;
-
 }
+
+.badge-map {
+  position: relative;
+  padding: 5px 10px;
+  color: white;
+  //right:2px;
+  top:-3px;
+}
+
 .card-product h2 {
   font-size: 16px;
   font-weight: bold;
