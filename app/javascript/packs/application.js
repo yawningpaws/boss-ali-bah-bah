@@ -31,8 +31,6 @@ import { initFlatpickr } from '../plugins/init_flatpickr';
 import { initTooltip } from '../plugins/init_tooltip';
 import { initMapbox } from '../plugins/init_mapbox';
 import { toggleCollapse } from '../plugins/init_toggle';
-
-
 import { initServiceworker } from '../plugins/register_serviceworker';
 import { accidentInput } from '../plugins/init_accident_input';
 

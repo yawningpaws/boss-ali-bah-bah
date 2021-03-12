@@ -44,8 +44,3 @@ Organisation.create!(name: 'HealthServe - Westlite Domitory', address: 'Westlite
 Organisation.create!(name: 'SG Accident Help Centre', address: '6 Flanders Square',opening_time: '10am',closing_time: '6:30pm',phone_number: '6291 0751',email_address: 'info@mysite.com',website: 'https://www.sgaccident.org.sg/copy-of-contact',latitude: 1.312667971502342,longitude: 103.85759574133353)
 Organisation.create!(name: 'Migrant Workers Centre', address: '51 Soon Lee Rd, Migrant Workers Centre Recreation Club, Singapore 628088',opening_time: '9am',closing_time: '7pm',phone_number: '65362692',email_address: 'sip@mwc.org.sg',website: 'http://www.mwc.org.sg/',latitude: 1.33291179549632,longitude: 103.69914502598799)
 Organisation.create!(name: 'ACMI', address: '#04-01, Agape Village, 319264, 7 Lor 8 Toa Payoh, Singapore 319252',opening_time: '8:30am',closing_time: '5:30pm',phone_number: '68017400',email_address: 'sip@mwc.org.sg',website: 'http://www.mwc.org.sg/',latitude: 1.340306694748082, longitude: 103.85713864133348)
-
-Article.create!(title:"When am I entitled to overtime pay?" ,content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus auctor convallis erat, vel tempus mauris congue sed. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae")
-Article.create!(title:"How much should I expect to receive each month?" ,content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-Article.create!(title:"What should I do if my boss wants to deport me?" ,content:"Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
-
