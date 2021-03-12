@@ -24,22 +24,23 @@
       <div class="collapse" id="<%= key.strftime("%B_%Y") %>">
         <div class="card card-body">
           <%= turbo_frame_tag "worklog_email" do %>
-          <h4>Email log as csv</h4>
-          <form action="/workdays/send" method="post" id="log<%= key.strftime("%B_%Y") %>">
-            <label for="email">Email address:</label><br>
-            <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
-            <datalist id="organisations">
-              <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
-              <option value="info@mysite.com">FF</option>
-              <option value="info@twc2.org.sg">Transient Workers Count too</option>
-              <option value="nurezlia@home.org.sg">HOME</option>
-              <option value="info@healthserve.org.sg">Health Serve</option>
-            </datalist>
-            <input type="hidden" name="log_key" value="<%= key %>">
-            <button type="submit" form="log<%= key.strftime("%B_%Y") %>" value="Submit" class="btn btn-success mt-2">Submit</button>
-          </form>
-          <% end %>
-
+          <div class="container border my-3 py-3">
+            <h4>Email log as csv</h4>
+            <form action="/workdays/send" method="post" id="log<%= key.strftime("%B_%Y") %>">
+              <label for="email">Email address:</label><br>
+              <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
+              <datalist id="organisations">
+                <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
+                <option value="info@mysite.com">FF</option>
+                <option value="info@twc2.org.sg">Transient Workers Count too</option>
+                <option value="nurezlia@home.org.sg">HOME</option>
+                <option value="info@healthserve.org.sg">Health Serve</option>
+              </datalist>
+              <input type="hidden" name="log_key" value="<%= key %>">
+              <button type="submit" form="log<%= key.strftime("%B_%Y") %>" value="Submit" class="btn btn-success mt-2 text-white">Send Email</button>
+            </form>
+            <% end %>
+          </div>
         </div>
       </div>
       <% end %>
@@ -55,24 +56,26 @@
           <p>Amount: <%= payslip.amount  %></p>
           <p>Paid by: <%= payslip.payment_method %></p>
           <% payslip.photos.each do |photo| %>
-          <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fit, class: 'w-100' %>
+          <%= cl_image_tag photo.key, crop: :fit, class: 'w-100' %>
           <% end %>
           <%= turbo_frame_tag "payslip_email" do %>
-          <h4>Send payslip details as email</h4>
-          <form action="/payslips/send" method="post" id="payslip<%= payslip.id %>">
-            <label for="email">Email address:</label><br>
-            <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
-            <datalist id="organisations">
-              <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
-              <option value="info@mysite.com">FF</option>
-              <option value="info@twc2.org.sg">Transient Workers Count too</option>
-              <option value="nurezlia@home.org.sg">HOME</option>
-              <option value="info@healthserve.org.sg">Health Serve</option>
-            </datalist><br>
-            <input type="hidden" name="payslip_id" value="<%= payslip.id %>">
-            <button type="submit" form="payslip<%= payslip.id %>" value="Submit" class="btn btn-success mt-2">Submit</button>
-          </form>
-          <% end %>
+          <div class="container border my-3 py-3">
+            <h4>Send payslip details as email</h4>
+            <form action="/payslips/send" method="post" id="payslip<%= payslip.id %>">
+              <label for="email">Email address:</label><br>
+              <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
+              <datalist id="organisations">
+                <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
+                <option value="info@mysite.com">FF</option>
+                <option value="info@twc2.org.sg">Transient Workers Count too</option>
+                <option value="nurezlia@home.org.sg">HOME</option>
+                <option value="info@healthserve.org.sg">Health Serve</option>
+              </datalist><br>
+              <input type="hidden" name="payslip_id" value="<%= payslip.id %>">
+              <button type="submit" form="payslip<%= payslip.id %>" value="Submit" class="btn btn-success mt-2 text-white">Send Email</button>
+            </form>
+            <% end %>
+          </div>
         </div>
       </div>
       <% end %>
@@ -83,7 +86,7 @@
         <%= accident.injured_part %> injury on <%= accident.date.strftime("%d %b %Y") %>
       </button>
       <div class="collapse" id="accident_<%= index %>">
-        <div class="card card-body">
+        <div class="card card-body accident">
           <p><strong>Date:</strong><br><%= accident.date.strftime("%d %b %Y") %></p>
           <p><strong>Time:</strong><br><%= accident.time.strftime("%k:%M")%></p>
           <p><strong>Description:</strong><br><%= accident.description%></p>
@@ -105,9 +108,12 @@
             <small class="text-danger">*MC should have been given*</small>
             <% end %>
           </p>
-          <% accident.photos.each do |photo| %>
-          <%= cl_image_tag photo.key, crop: :thumb, class: 'w-75' %>
-          <% end %>
+          <p>Attached photos: <%= accident.photos.count %></p>
+          <div class="d-flex">
+            <% accident.photos.each do |photo| %>
+            <%= cl_image_tag photo.key, height: 100, crop: :fit %>
+            <% end %>
+          </div>
 
           <%= turbo_frame_tag "email" do %>
           <div class="border p-3 my-3">
@@ -123,7 +129,7 @@
                 <option value="info@healthserve.org.sg">Health Serve</option>
               </datalist><br>
               <input type="hidden" name="accident_id" value="<%= accident.id %>">
-              <%= button_to "Send Email", accidents_send_path(@accident), class: 'btn btn-success mt-2' %>
+              <%= button_to "Send Email", accidents_send_path(@accident), class: 'btn btn-success mt-2 text-white' %>
             </form>
           </div>
           <% end %>
@@ -132,24 +138,28 @@
       <% end %>
     </div>
     <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">
-      <% if @user.ipa_photo %>
-      <%= cl_image_tag @user.ipa_photo.key, crop: :fit, class: 'w-100'%>
-      <% end %>
+      <div class="py-3">
+        <% if @user.ipa_photo %>
+        <%= cl_image_tag @user.ipa_photo.key, crop: :fit, class: 'w-100'%>
+        <% end %>
+      </div>
       <%= turbo_frame_tag "ipa_email" do %>
-      <h4>Send IPA as email</h4>
-      <form action="/users/send" method="post" id="ipa">
-        <label for="email">Email address:</label><br>
-        <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
-        <datalist id="organisations">
-          <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
-          <option value="info@mysite.com">FF</option>
-          <option value="info@twc2.org.sg">Transient Workers Count too</option>
-          <option value="nurezlia@home.org.sg">HOME</option>
-          <option value="info@healthserve.org.sg">Health Serve</option>
-        </datalist><br>
-        <button type="submit" form="ipa" value="Submit" class="btn btn-success mt-2">Submit</button>
-      </form>
-      <% end %>
+      <div class="container border my-3 py-3">
+        <h4>Send IPA as email</h4>
+        <form action="/users/send" method="post" id="ipa">
+          <label for="email">Email address:</label><br>
+          <input list="organisations" id="email" name="email" class="w-100" autocomplete="off">
+          <datalist id="organisations">
+            <option value="sip@mwc.org.sg">Migrant Workers Centre</option>
+            <option value="info@mysite.com">SG Accident Help Centre</option>
+            <option value="info@twc2.org.sg">Transient Workers Count too</option>
+            <option value="nurezlia@home.org.sg">HOME</option>
+            <option value="info@healthserve.org.sg">Health Serve</option>
+          </datalist><br>
+          <button type="submit" form="ipa" value="Submit" class="btn btn-success mt-2 text-white">Send Email</button>
+        </form>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
