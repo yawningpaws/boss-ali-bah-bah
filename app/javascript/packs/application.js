@@ -41,7 +41,6 @@ document.addEventListener('turbo:load', () => {
   initFlatpickr();
   initTooltip();
   // console.log('about to fire mapbox');
-  initMapbox();
   toggleCollapse();
   initServiceworker();
   initMapbox();
