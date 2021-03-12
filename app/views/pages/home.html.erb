@@ -88,9 +88,38 @@
 </div>
 <div style="background-color:#262737" class="p-4 mb-5">
   <div class="container">
-    <%= link_to 'Log my work hours', new_workday_path, class: 'btn btn-block btn-green my-3 text-dark' %>
-    <%= link_to 'Add salary', new_payslip_path, class: 'btn btn-block btn-green my-3 text-dark' %>
-    <%= link_to 'I am injured', new_accident_path, class: 'btn btn-block btn-green my-3 text-dark' %>
+    <%= link_to new_workday_path do %>
+      <div class="card-product my-3 p-3 rounded">
+        <%= image_tag "card-forgot.png", height: 61, width: 61, crop: :fill %>
+        <div class="card-product-infos">
+          <h2>Forgot to check in?</h2>
+          <div class="card-line" style="height: 2px; background-color:#1bbba4"></div>
+          <p>Log your hours for a missed day so that your boss cannot underpay you.</p>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to new_payslip_path do %>
+      <div class="card-product my-3 p-3 rounded">
+        <%= image_tag "card-accident.png", height: 61, width: 61, crop: :fill %>
+        <div class="card-product-infos">
+          <h2>Accident at work?</h2>
+          <div class="card-line" style="height: 2px; background-color:#1bbba4"></div>
+          <p>Let us automate the medical reporting process and keep your paperwork organised.</p>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to new_accident_path do %>
+      <div class="card-product my-3 p-3 rounded">
+        <%= image_tag "card-paid.png", height: 61, width: 61, crop: :fill %>
+        <div class="card-product-infos">
+          <h2>Got paid?</h2>
+          <div class="card-line" style="height: 2px; background-color:#1bbba4"></div>
+          <p>Log your salary so that we can check that you are being paid fairly and on time.</p>
+        </div>
+      </div>
+    <% end %>
     <br>
     <% if user_signed_in? %>
     <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-blue center", data: { turbo: false }  %>
