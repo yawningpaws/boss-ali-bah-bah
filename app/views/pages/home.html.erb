@@ -120,7 +120,7 @@
     <% end %>
     <br>
     <% if user_signed_in? %>
-    <%= link_to "More options >", destroy_user_session_path, method: :delete, class: "text-white center", style: "font-size:15px; margin-left:105px;",data: { turbo: false }  %>
+    <%= button_to "More options >", destroy_user_session_path, method: :delete, class: "btn btn-outline-primary text-white", style: "font-size:15px; margin-left:105px;",data: { turbo: false }  %>
     <% end %>
   </div>
 </div>
