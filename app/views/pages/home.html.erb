@@ -36,7 +36,7 @@
       <!-- <a href="/organisation#article<%= @article.first.id %>"><%= @article.first.title %></a> -->
     </strong>
     <% else %>
-    <strong><p class="move-down" style="color:#2ab59b">You're good for today 👍 </p></strong>
+    <strong><p class="move-down" style="color:#2ab59b">You've checked in today! 👍 </p></strong>
     <strong><i class="fas fa-info-circle"></i>
       <%= link_to organisation_path(anchor: "article#{@article.first.id}"), data: { turbo: false } do %><%= @article.first.title %><% end %>
     </strong>
@@ -120,7 +120,7 @@
     <% end %>
     <br>
     <% if user_signed_in? %>
-    <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "text-blue center", data: { turbo: false }  %>
+    <%= link_to "More options >", destroy_user_session_path, method: :delete, class: "text-white center", style: "font-size:15px; margin-left:105px;",data: { turbo: false }  %>
     <% end %>
   </div>
 </div>

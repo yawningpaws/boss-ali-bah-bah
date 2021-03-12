@@ -9,7 +9,7 @@
         <div>
           <%= link_to "#{edit_workday_path(workday)}?#{date}" do %>
           <% if workday.on_rest %>
-            <div class="calendar-circle date" style="background-color: rgb(254, 214, 72,0.4);"><%= date.day %></div>
+            <div class="calendar-circle date" style="background-color: rgb(254, 214, 72, 0.4);"><%= date.day %></div>
           <% elsif workday.on_mc %>
             <div class="calendar-circle date" style="background-color: rgba(241, 98, 81, 0.4);"><%= date.day %></div>
           <% else %>
@@ -27,7 +27,7 @@
       <p class="my-0 mx-1">Work day</p>
     </div>
     <div class="d-flex align-items-center">
-      <div class="calendar-circle-small m-0" style="background-color: rgb(153, 117, 189, 0.4);"></div>
+      <div class="calendar-circle-small m-0" style="background-color: rgb(254, 214, 72, 0.4);"></div>
       <p class="my-0 mx-1">Rest day</p>
     </div>
     <div class="d-flex align-items-center">
