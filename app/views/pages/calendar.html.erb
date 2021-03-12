@@ -36,7 +36,7 @@
     </div>
   </div>
 
-  <div class="my-3 py-3 bg-white" style="text-align: center;">
+  <div class="my-3 py-3 bg-white" style="text-align: center; box-shadow: 0 0 15px rgba(0,0,0,0.2);">
     <h5>Salary</h5>
 
     <% start_date = params[:start_date] %>
@@ -57,7 +57,7 @@
         <% amount_tooltip = 'Boss no ali-bah-bah! 👍' %>
       <% else %>
         <% amount_color = "text-danger"  %>
-        <% amount_tooltip = "Boss may be underpaying you. Seek help." %>
+        <% amount_tooltip = "<a href='/organisation' class='text-white'>Boss may be underpaying you. Seek help.</a>" %>
       <% end %>
 
       <% if payslip.payment_method == "bank transfer" %>
@@ -65,15 +65,15 @@
         <% method_tooltip = 'Boss no ali-bah-bah! 👍' %>
       <% else %>
         <% method_color = "text-danger"  %>
-        <% method_tooltip = "Boss must pay by bank transfer. Seek help." %>
+        <% method_tooltip = "<a href='/organisation' class='text-white'>Boss must pay by bank transfer. Seek help.</a>" %>
       <% end %>
 
       <p class="my-0 <%= amount_color %>"
-        data-toggle="tooltip" data-placement="top" data-trigger="hover" title="<%= amount_tooltip %>">
+        data-toggle="tooltip" data-placement="top" data-trigger="hover" data-html="true" title="<%= amount_tooltip %>">
         Received $<%= payslip.amount %> <i class="fas fa-info-circle"></i>
       </p>
       <p class="<%= method_color %>"
-        data-toggle="tooltip" data-placement="top" data-trigger="hover" title="<%= method_tooltip %>">
+        data-toggle="tooltip" data-placement="top" data-trigger="hover" data-html="true" title="<%= method_tooltip %>">
         By <%= payslip.payment_method %> <i class="fas fa-info-circle"></i>
       </p>
       <%= link_to "Edit", edit_payslip_path(payslip, month: payslip.month, year: payslip.year), class: "btn btn-primary" %>
