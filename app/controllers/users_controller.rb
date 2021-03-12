@@ -19,11 +19,14 @@ class UsersController < ApplicationController
         render :onboarding
       end
     else
-      if current_user.update(strong_upload_params)
-        redirect_to :personal_details
-      else
-        render :onboarding
-      end
+      # if current_user.update(strong_upload_params)
+      #   redirect_to :personal_details
+      # else
+      #   render :onboarding
+      # end
+      current_user.ipa_photo = strong_upload_params[:ipa_photo]
+      current_user.save(validate: false)
+      redirect_to :personal_details
     end
   end
 
@@ -53,7 +56,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name,:phone_number,:identification_number,:name,:basic_salary,:hourly_salary)
   end
   def strong_upload_params
-    params.require(:user).permit(:name,:phone_number,:identification_number,:name,:basic_salary,:hourly_salary,:ipa_photo)
+    params.require(:user).permit(:ipa_photo)
   end
   def personal_params
     params.require(:user).permit(:name,:basic_salary)
