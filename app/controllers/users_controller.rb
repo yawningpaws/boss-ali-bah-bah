@@ -31,11 +31,10 @@ class UsersController < ApplicationController
   end
 
   def personal_update
-    if(current_user.update(personal_params))
-      redirect_to root_path
-    else
-      render :personal_details
-    end
+    current_user.name = personal_params[:name]
+    current_user.basic_salary = personal_params[:basic_salary]
+    current_user.save(validate: false)
+    redirect_to root_path
   end
 
   def send_ipa
@@ -57,6 +56,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name,:phone_number,:identification_number,:name,:basic_salary,:hourly_salary,:ipa_photo)
   end
   def personal_params
-    params.require(:user).permit(:name,:phone_number,:identification_number,:name,:basic_salary)
+    params.require(:user).permit(:name,:basic_salary)
   end
 end
