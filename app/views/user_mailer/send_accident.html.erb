@@ -23,13 +23,13 @@
     <% end %>
   </p>
   <p>
-    <strong>No. of MC days:<br><%= @accident.mc_days %><br>
+    <strong>No. of MC days:</strong><br><%= @accident.mc_days %><br>
       <% if @accident.mc_days == 0 || nil %>
       <small style="color:red;">*MC should have been given*</small>
       <% end %>
   </p>
   <% @accident.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, crop: :fit, class: 'w-75' %>
+  <%= cl_image_tag photo.key, flags: 'attachment', height: 200 %>
   <% end %>
 </body>
 
