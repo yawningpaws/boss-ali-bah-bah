@@ -11,8 +11,6 @@
 <% end %>
 
 <div class="container my-3">
-  <p style="text-align: center;">Keep photo evidence of the salary you are paid. This is important if you need to make a salary claim.</p>
-  <h5 class="mb-3" style="text-align: center;">Start protecting yourself today.</h5>
   <%= simple_form_for @payslip do |f| %>
     <%= f.input :month, label: 'Salary for month', collection: months_with_values, selected: default_month %>
     <%= f.input :year, label: 'Year', collection: years, selected: default_year %>
