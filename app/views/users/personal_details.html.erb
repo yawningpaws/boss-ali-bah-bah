@@ -9,12 +9,11 @@
   <h2 class ="text-center text-blue">Personal details</h2>
   <%= simple_form_for current_user, url: 'personal_update', data: { turbo_frame: '_top' } do |f| %>
   <%= f.input :name %>
-  <%= f.input :phone_number %>
-  <%= f.input :identification_number %>
-  <%= f.input :basic_salary %>
+  <%= f.input :basic_salary, label: 'Basic Monthly Salary (in SGD)',
+    hint: "This is used to calculate your pay for overtime work and work on rest days, which is important in salary claims." %>
   <%= f.button :submit, class: 'btn btn-blue btn-block text-white', value: 'Submit' %>
   <% end %>
-  <%= link_to 'Back', :back, class: 'btn btn-secondary btn-block my-3' %>
+  <%= link_to 'Back', :back, class: 'btn btn-outline-primary text-primary btn-block my-3' %>
 </div>
   <% end %>
 
