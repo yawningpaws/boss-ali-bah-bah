@@ -1,6 +1,8 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as turf from '@turf/turf';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+
 const buildMap = (mapElement) => {
     //currentPosition();
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
@@ -141,6 +143,8 @@ const buildMap = (mapElement) => {
       })
     })
     observer.observe(listingsContainer, config)
+    // map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
+    //                                   mapboxgl: mapboxgl }));
   }
 }
 export { initMapbox };
