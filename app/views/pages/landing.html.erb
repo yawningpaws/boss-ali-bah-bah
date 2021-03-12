@@ -1,6 +1,6 @@
 <div class="container my-4">
     <%= image_tag "boss-abb-logo.png", height: 80, width: 80, crop: :fill, id: 'logo' %>
-  <div id="carouselLanding" class="carousel slide mb-4" data-ride="carousel">
+  <div id="carouselLanding" class="carousel slide mb-4" data-ride="carousel" data-interval="3000">
     <ol class="carousel-indicators">
       <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
       <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -10,19 +10,19 @@
       <div class="carousel-item active">
         <%= image_tag "landing-contract.svg" %>
         <div class="carousel-caption">
-          <h6>Learn about your employment rights</h6>
+          <h5>Learn about your employment rights</h5>
         </div>
       </div>
       <div class="carousel-item">
         <%= image_tag "landing-documents.svg" %>
         <div class="carousel-caption">
-          <h6>Keep important documents simply and quickly</h6>
+          <h5>Protect yourself with simple records</h5>
         </div>
       </div>
       <div class="carousel-item">
         <%= image_tag "landing-sign.svg" %>
         <div class="carousel-caption">
-          <h6>Seek help easily</h6>
+          <h5>Seek help easily</h5>
         </div>
       </div>
     </div>

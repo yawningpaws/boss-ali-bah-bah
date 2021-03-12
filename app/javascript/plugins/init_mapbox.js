@@ -1,7 +1,9 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import * as turf from '@turf/turf';
-  const buildMap = (mapElement) => {
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+
+const buildMap = (mapElement) => {
     //currentPosition();
     mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
     return new mapboxgl.Map({
@@ -35,24 +37,51 @@ import * as turf from '@turf/turf';
       map.fitBounds(bounds, { padding: 70, maxZoom: 14 });
     });
   };
+
+  const sortItems = (organisations, ddMenu) => {
+    const compare = (a, b) => {
+      if (a.distance > b.distance) {
+        return 1;
+      }
+      if (a.distance < b.distance) {
+        return -1;
+      }
+      return 0;
+    };
+    organisations.sort(compare);
+    organisations.forEach(organisation => {
+      ddMenu.innerHTML += `<li class="list-group-item" data-longitude="${organisation.longitude}" data-latitude="${organisation.latitude}"><a class="listing"><div><strong>${organisation.name}</strong><span class="badge badge-dark badge-map ml-2" style="font-weight: lighter; background-color:#262737">${ organisation.distance} km away</span></div><div class="font-size-add">📍${organisation.address}</div><div class="font-size-add">📞${organisation.phone_number}</div></a>`
+    });
+  };
+
+
   const dropdownPopulate = new Promise((resolve, reject) => {
-      const newElement = document.createElement('div');
-      newElement.innerHTML = "<div class=\"spinner-border\" role=\"status\"> <span class=\"sr-only\">Loading...</span> </div>"
-      const listings = document.querySelector('.listings');
-      if (listings){
+    const newElement = document.createElement('div');
+    newElement.innerHTML = "<div class=\"spinner-border\" role=\"status\"> <span class=\"sr-only\">Loading...</span> </div>"
+    const listings = document.querySelector('.listings');
+    if (listings){
       listings.appendChild(newElement);
       const ddMenu = document.querySelector('.listings');
       const organisations = JSON.parse(ddMenu.dataset.organisations);
-      organisations.forEach(organisation => {
-        console.log(organisation);
         navigator.geolocation.getCurrentPosition((data) => {
+          const orgArray =  organisations.map(organisation => {
           const from = turf.point([ data.coords.longitude, data.coords.latitude]);
           const to = turf.point([organisation.longitude, organisation.latitude]);
           const options = {units: 'kilometers'};
-          const distance = turf.distance(from, to, options);
+
+          Object.defineProperty(organisation, 'distance', {
+            value: Number(turf.distance(from, to, options).toFixed(2)),
+            writable: true,
+            enumerable: true,
+            configurable: true
+          });
+          return organisation;
+          // const distance = turf.distance(from, to, options);
           // ddMenu.insertAdjacentHTML('beforeend', `<li class="list-group-item"><a class="listing" data-longitude="${organisation.longitude}" data-latitude="${organisation.latitude}"> <strong>${organisation.name}</strong><div class="font-size-add">📍${organisation.address}</div><div class="font-size-add">📞${organisation.phone_number}</div><div class="font-size"> ${ distance.toFixed(2)}km away</div></a>`);
-          ddMenu.innerHTML += `<li class="list-group-item" data-longitude="${organisation.longitude}" data-latitude="${organisation.latitude}"><a class="listing"> <strong>${organisation.name}</strong><div class="font-size-add">📍${organisation.address}</div><div class="font-size-add">📞${organisation.phone_number}</div><div class="font-size"> ${ distance.toFixed(2)}km away</div></a>`
+
         });
+
+        sortItems(orgArray, ddMenu);
       });
       resolve(newElement)
       // delete the rendering of getting your data
@@ -68,21 +97,22 @@ import * as turf from '@turf/turf';
       })
     });
   };
-const initMapbox = () => {
-  const mapElement = document.getElementById('map');
-  if (mapElement) {
-    const map = buildMap(mapElement);
-    map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      })
-    );
-    const markers = JSON.parse(mapElement.dataset.markers);
-    addMarkersToMap(map, markers);
-    currentPosition(map);
+
+  const initMapbox = () => {
+    const mapElement = document.getElementById('map');
+    if (mapElement) {
+      const map = buildMap(mapElement);
+      map.addControl(
+        new mapboxgl.GeolocateControl({
+          positionOptions: {
+            enableHighAccuracy: true
+          },
+          trackUserLocation: true
+        })
+        );
+      const markers = JSON.parse(mapElement.dataset.markers);
+      addMarkersToMap(map, markers);
+      currentPosition(map);
     // fitMapToMarkers(map);
     markers.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
@@ -102,18 +132,21 @@ const initMapbox = () => {
     dropdownPopulate
     .then( spinner => {
       spinner.remove();
-      })
-    console.log('left the promise');
+    })
     const listingsContainer = document.querySelector('.list-group.list-group-flush.listings')
     const config = { attributes: true, childList: true, subtree: true }
     const observer = new MutationObserver((mutationsList) => {
-        mutationsList.forEach((mutation) => {
-          if (mutation.type === 'childList') {
-            flyToMap(map);
-          }
-        })
+      mutationsList.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+          flyToMap(map);
+        }
       })
+    })
     observer.observe(listingsContainer, config)
-    }
+    // map.addControl(new MapboxGeocoder({ accessToken: mapboxgl.accessToken,
+    //                                   mapboxgl: mapboxgl }));
   }
+}
 export { initMapbox };
+
+

@@ -1,7 +1,12 @@
+.simple-calendar {
+  background-color:white;
+}
+
 .calendar-circle {
-  height: 2rem;
-  width: 2rem;
+  height: 3rem;
+  min-width: 2.5rem;
   line-height: 1rem;
+  padding: 0;
 
   &.date {
     display: flex;
@@ -16,4 +21,15 @@
   width: 1rem;
   line-height: 1rem;
   opacity: 70%;
+}
+
+.simple-calendar .today {
+  background-color: transparent !important;
+  font-weight: bold;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.simple-calendar td {
+  padding: 0 !important;
 }

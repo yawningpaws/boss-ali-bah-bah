@@ -10,7 +10,6 @@
   <% default_year = Time.now.year %>
 <% end %>
 
-
 <div class="container my-3">
   <%= simple_form_for @payslip do |f| %>
     <%= f.input :month, label: 'Salary for month', collection: months_with_values, selected: default_month %>
