@@ -139,9 +139,11 @@
     </div>
     <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">
       <div class="py-3">
-        <% if @user.ipa_photo %>
-        <%= cl_image_tag @user.ipa_photo.key, crop: :fit, height: 100 %>
-        <% end %>
+        <div class="d-flex justify-content-around">
+          <% if @user.ipa_photo %>
+          <%= cl_image_tag @user.ipa_photo.key, crop: :fit, height: 200 %>
+          <% end %>
+        </div>
       </div>
       <%= turbo_frame_tag "ipa_email" do %>
       <div class="container border my-3 py-3">
