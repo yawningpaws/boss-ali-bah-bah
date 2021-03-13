@@ -56,7 +56,7 @@
           <p>Amount: <%= payslip.amount  %></p>
           <p>Paid by: <%= payslip.payment_method %></p>
           <% payslip.photos.each do |photo| %>
-          <%= cl_image_tag photo.key, crop: :fit, height: 100 %>
+          <%= cl_image_tag photo.key, crop: :fit %>
           <% end %>
           <%= turbo_frame_tag "payslip_email" do %>
           <div class="container border my-3 py-3">
@@ -141,7 +141,7 @@
       <div class="py-3">
         <div class="d-flex justify-content-around">
           <% if @user.ipa_photo %>
-          <%= cl_image_tag @user.ipa_photo.key, crop: :fit, height: 200 %>
+          <%= cl_image_tag @user.ipa_photo.key, crop: :fit %>
           <% end %>
         </div>
       </div>
