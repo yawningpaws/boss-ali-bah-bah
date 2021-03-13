@@ -56,7 +56,7 @@
           <p>Amount: <%= payslip.amount  %></p>
           <p>Paid by: <%= payslip.payment_method %></p>
           <% payslip.photos.each do |photo| %>
-          <%= cl_image_tag photo.key, crop: :fit, class: 'w-100' %>
+          <%= cl_image_tag photo.key, crop: :fit, height: 100 %>
           <% end %>
           <%= turbo_frame_tag "payslip_email" do %>
           <div class="container border my-3 py-3">
@@ -93,13 +93,13 @@
           <p><strong>Part injured:</strong><br><%= accident.injured_part%></p>
           <p><strong>Place of Treatment:</strong><br><%= accident.medical_facility%><br>
             <% if accident.medical_facility == 'None' || nil %>
-            <small class="text-danger">*Employer should have sought proper medical care*</small>
+            <small class="text-danger">*Boss should have brought you to medical facility*</small>
             <% end %>
           </p>
           <p>
             <strong>Treatment was paid by boss:</strong><br><%= accident.paid_by_employer ? 'Yes' : 'No' %> <br>
             <% unless accident.paid_by_employer %>
-            <small class="text-danger">*Employer should have paid*</small>
+            <small class="text-danger">*Boss should have paid*</small>
             <% end %>
           </p>
           <p>
@@ -139,9 +139,11 @@
     </div>
     <div class="tab-pane fade" id="contract" role="tabpanel" aria-labelledby="contract-tab">
       <div class="py-3">
-        <% if @user.ipa_photo %>
-        <%= cl_image_tag @user.ipa_photo.key, crop: :fit, class: 'w-100'%>
-        <% end %>
+        <div class="d-flex justify-content-around">
+          <% if @user.ipa_photo %>
+          <%= cl_image_tag @user.ipa_photo.key, crop: :fit, height: 200 %>
+          <% end %>
+        </div>
       </div>
       <%= turbo_frame_tag "ipa_email" do %>
       <div class="container border my-3 py-3">

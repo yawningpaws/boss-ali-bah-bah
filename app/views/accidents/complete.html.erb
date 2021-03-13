@@ -7,13 +7,13 @@
   <p><strong>Part injured:</strong><br><%= @accident.injured_part%></p>
   <p><strong>Place of Treatment:</strong><br><%= @accident.medical_facility%><br>
     <% if @accident.medical_facility == 'None' || nil %>
-    <small class="text-danger">*Employer should have sought proper medical care*</small>
+    <small class="text-danger">*Boss should have brought you to medical facility*</small>
     <% end %>
   </p>
   <p>
     <strong>Treatment was paid by boss:</strong><br><%= @accident.paid_by_employer ? 'Yes' : 'No' %> <br>
     <% unless @accident.paid_by_employer %>
-    <small class="text-danger">*Employer should have paid*</small>
+    <small class="text-danger">*Boss should have paid*</small>
     <% end %>
   </p>
   <p>
@@ -22,12 +22,15 @@
     <small class="text-danger">*MC should have been given*</small>
     <% end %>
   </p>
-  <% @accident.photos.each do |photo| %>
-  <%= cl_image_tag photo.key, crop: :thumb, class: 'w-50' %>
-  <% end %>
+  <p>Attached photos: <%= @accident.photos.count %></p>
+  <div class="d-flex">
+    <% @accident.photos.each do |photo| %>
+    <%= cl_image_tag photo.key, crop: :fit, height: 100 %>
+    <% end %>
+  </div>
 </div>
 <%= turbo_frame_tag "email" do %>
-<div class="container py-3 border rounded bg-white">
+<div class="container py-3 my-3 border rounded bg-white">
   <h4>Send the report as an email</h4>
   <form action="/accidents/send" method="post">
     <label for="email">Email address:</label><br>

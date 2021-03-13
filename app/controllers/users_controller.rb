@@ -4,27 +4,32 @@ class UsersController < ApplicationController
   end
 
   def contract_update
-    ipa = params[:user][:ipa_photo]
-    if defined?(params[:user][:ipa_photo].content_type) == nil
-      base_64_image = ipa.gsub!(/^data:.*,/, '')
-      decoded_image = Base64.decode64(base_64_image)
+    # ipa = params[:user][:ipa_photo]
+    # if defined?(params[:user][:ipa_photo].content_type) == nil
+    #   base_64_image = ipa.gsub!(/^data:.*,/, '')
+    #   decoded_image = Base64.decode64(base_64_image)
 
-      current_user.ipa_photo.attach(
-        io: StringIO.new(decoded_image),
-        filename: "contract_#{current_user.email}.png"
-        )
-      if current_user.update(strong_params)
-        redirect_to :personal_details
-      else
-        render :onboarding
-      end
-    else
-      if current_user.update(strong_upload_params)
-        redirect_to :personal_details
-      else
-        render :onboarding
-      end
+    #   current_user.ipa_photo.attach(
+    #     io: StringIO.new(decoded_image),
+    #     filename: "contract_#{current_user.email}.png"
+    #     )
+    #   if current_user.update(strong_params)
+    #     redirect_to :personal_details
+    #   else
+    #     render :onboarding
+    #   end
+    # else
+    #   # if current_user.update(strong_upload_params)
+    #   #   redirect_to :personal_details
+    #   # else
+    #   #   render :onboarding
+    #   # end
+    # end
+    unless strong_upload_params[:ipa_photo].nil?
+      current_user.ipa_photo = strong_upload_params[:ipa_photo]
+      current_user.save(validate: false)
     end
+    redirect_to :personal_details
   end
 
   def personal_details
@@ -53,7 +58,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name,:phone_number,:identification_number,:name,:basic_salary,:hourly_salary)
   end
   def strong_upload_params
-    params.require(:user).permit(:name,:phone_number,:identification_number,:name,:basic_salary,:hourly_salary,:ipa_photo)
+    params.require(:user).permit(:ipa_photo)
   end
   def personal_params
     params.require(:user).permit(:name,:basic_salary)
